@@ -1,0 +1,117 @@
+/* You can add global styles to this file, and also import other style files */
+
+@keyframes donut-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+:root  {
+  --lpx-logo: url('https://websiteapi.dawaa24.com/img/dawaa24-1627391353.svg');
+  --lpx-logo-icon: url('https://neo-uat-test.dawaa24.com/assets/images/logo/icon.ico');
+  --lpx-brand: #0baddd !important;
+}
+.lpx-nav-menu .lpx-menu-item-link.selected .lpx-menu-item-icon{
+  color: #0baddd !important;
+}
+.donut {
+  display: inline-block;
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: #0baddd;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: donut-spin 1.2s linear infinite;
+
+  &.centered {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.main-color{
+  color: #0087a1 !important;
+}
+.main-background{
+  background-color: #0087a1 !important;
+}
+#lpx-wrapper > div.lpx-content-container > div.lpx-topbar-container > div > div.lpx-topbar-content > lpx-toolbar-container > lpx-toolbar > lpx-toolbar-items > lpx-toolbar-item:nth-child(2) > div > div > div > abp-language-selection > lpx-language-selection > div > div.dropdown-menu.show{
+  position: absolute !important;
+  inset: 0px 0px auto auto !important;
+  margin: 0px !important;
+  transform: translate(76px, 23px) !important;
+}
+
+
+
+.btn-primary{
+  border-color: #0baddd !important;
+}
+.bg-main-color{
+  background-color: #0baddd;
+}
+
+.dropdown-menu{
+  --bs-dropdown-link-active-bg : #0baddd;
+}
+.nav-pills .nav-link.active{
+  background-color: #0baddd;
+  color: black;
+}
+.cpointer{
+  cursor:  pointer !important;
+}
+.lpx-sidebar-container .lpx-sidebar .lpx-nav .lpx-nav-menu{
+  background-color: #fff !important;
+}
+#lpx-wrapper > div.lpx-sidebar-container.ng-star-inserted > div > lpx-navbar > nav > lpx-navbar-routes > ul > li:nth-child(1) > lpx-sub-navbar > a{
+  background-color: #fff !important;
+}
+#lpx-wrapper > div.lpx-sidebar-container.ng-star-inserted > div > lpx-navbar > nav > div{
+  background-color: #fff !important;
+}
+#lpx-wrapper > div.lpx-sidebar-container.ng-star-inserted > div > lpx-navbar > nav{
+  background-color: #fff !important;
+}
+.lpx-topbar-container{
+  background-color: #fff !important;
+}
+.lpx-nav-menu .lpx-menu-item-link.selected{
+  color: #124163 !important;
+}
+.lpx-nav-menu .lpx-menu-item-link{
+  color: #124163 !important;
+}
+.lpx-nav-menu .lpx-inner-menu-item .lpx-menu-item-link.selected, .lpx-nav-menu .lpx-inner-menu-item .lpx-menu-item-link:hover{
+  background-color: #fff !important;
+}
+.lpx-nav-menu .lpx-menu-item-link.selected{
+  background-color: #fff !important;
+}
+.lpx-nav-menu .lpx-menu-item-link{
+  background-color: #fff !important;
+}
+.lpx-nav-menu .lpx-menu-item-link:hover{
+  color: #124163 !important;
+}
+#lpx-wrapper > div.lpx-sidebar-container.ng-star-inserted > div > lpx-navbar > nav > lpx-navbar-routes > ul > li:nth-child(2) > lpx-sub-navbar > ul > li > lpx-sub-navbar > a > lpx-icon.dd-icon.hidden-in-hover-trigger.ng-tns-c4125907324-15.ng-star-inserted{
+  color: #0087a1 !important;
+  opacity: 1 !important;
+}
+.lpx-nav-menu .lpx-menu-item-link:hover .dd-icon{
+  color: #0087a1 !important;
+}
+
+.btn-primary{
+  background-color: #0baddd !important;
+}
+.btn-secondary{
+  background-color: rgba(0, 53, 94, 1) !important;
+}
+.btn {
+  border: none !important;
+}

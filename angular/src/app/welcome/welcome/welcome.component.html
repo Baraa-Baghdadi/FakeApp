@@ -1,0 +1,53 @@
+<div class="d-flex align-items-center empty-page-container vh-100">
+  <div class="mx-auto w-40 align-items-center">
+    <div class="row align-items-center mb-4">
+      <div class="card">
+        <a >
+          <!-- Logo of Dawaa -->
+          <div class="lpx-brand-logo lpx-login-logo my-3 mx-auto"></div>
+        </a>
+        <div class="card-body rounded w-100 ">
+          <div class="row">
+            <div class="col-12 ps-4 pe-4">
+              <div class="align-item-center d-flex justify-content-between mb-2">
+                <h4 class="m-0 me-auto text-dark-blue">{{"::Welcome" | abpLocalization}}</h4>
+                <div ngbDropdown  class="btn-group ms-auto dropdown">
+                  <button class="dropdown-toggle btn btn-sm btn-light languageBtnBg"
+                  data-toggle="dropdown" aria-haspopup="true" ngbDropdownToggle>
+                  <i class="bi bi-translate me-1"></i>{{labelOfSelectedLang}}
+                </button>
+                <div ngbDropdownMenu>
+                  <button ngbDropdownItem *ngFor="let lang of availableLangs" (click)="selectLang(lang.value)">
+                    {{lang.name}}
+                  </button>
+                </div>
+                </div>
+              </div>
+              <div class="act mt-4">
+                <ng-container  *ngIf="!hasLoggedIn">
+                  <button (click)="logIn()" class="btn btn-primary w-100 mb-2">
+                    {{ '::Login' | abpLocalization}}
+                  </button>
+                  <!-- Line -->
+                  <div class="row ng-star-inserted">
+                    <div class="col-5"><hr></div>
+                    <div class="col-2 d-flex align-items-center justify-content-center">
+                      <div class="text-center"><span>{{"::or" | abpLocalization}}</span>
+                      </div></div><div class="col-5">
+                        <hr>
+                      </div>
+                    </div>
+                    <!-- End Line -->
+                  <button routerLink="/register" class="btn btn-secondary w-100 mt-2 mb-4">
+                    {{ '::SignUp' | abpLocalization}}
+                  </button>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>

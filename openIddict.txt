@@ -1,0 +1,25 @@
+223a0204-854f-a1e6-3822-3a14b56c3f93	NULL	DawaaNeo_App	NULL	public	implicit	Console Test / Angular Application	NULL	NULL	["ept:logout","gt:authorization_code","rst:code","ept:authorization","ept:token","ept:revocation","ept:introspection","gt:password","gt:client_credentials","gt:refresh_token","scp:address","scp:email","scp:phone","scp:profile","scp:roles","scp:DawaaNeo"]	["http://localhost:4200"]	NULL	["http://localhost:4200"]	NULL	NULL	http://localhost:4200	NULL	{}	4cfb501a4aa54728b6b5a262cf460309	8/30/2024 1:25:27 PM	NULL	NULL	NULL	False	NULL	NULL
+2b8ca217-958e-10c8-a64b-3a14b56c4083	NULL	DawaaNeo_Swagger	NULL	public	implicit	Swagger Application	NULL	NULL	["ept:logout","gt:authorization_code","rst:code","ept:authorization","ept:token","ept:revocation","ept:introspection","scp:address","scp:email","scp:phone","scp:profile","scp:roles","scp:DawaaNeo"]	NULL	NULL	["https://localhost:44385/swagger/oauth2-redirect.html"]	NULL	NULL	https://localhost:44385	NULL	{}	edf4d72f50734ea7b8e207e29b9282dd	8/30/2024 1:25:27 PM	NULL	NULL	NULL	False	NULL	NULL
+
+
+
+
+
+
+
+
+
+
+
+
+
+3492e42e-9bf7-f6dc-b0ff-3a14b5825d50	2b8ca217-958e-10c8-a64b-3a14b56c4083	8/30/2024 12:49:36 PM	NULL	["DawaaNeo"]	valid	fe237e01-34b5-5c19-9bc1-3a14b56c3383	permanent	{}	468960f745284104baef5b71f17d7cd9	8/30/2024 1:49:36 PM	fe237e01-34b5-5c19-9bc1-3a14b56c3383	NULL	NULL	False	NULL	NULL
+8db52afc-f70c-606f-d5c0-3a14b5850659	2b8ca217-958e-10c8-a64b-3a14b56c4083	8/30/2024 12:52:30 PM	NULL	["DawaaNeo"]	valid	3825fbe9-09d5-c28c-71a1-3a14b5831499	permanent	{}	e0a8bc0e804c4e3c990f2629f6af5030	8/30/2024 1:52:30 PM	3825fbe9-09d5-c28c-71a1-3a14b5831499	NULL	NULL	False	NULL	NULL
+765dbb59-ca93-6e2c-ac87-3a14b5851a2f	223a0204-854f-a1e6-3822-3a14b56c3f93	8/30/2024 12:52:36 PM	NULL	["openid","offline_access","DawaaNeo"]	valid	3825fbe9-09d5-c28c-71a1-3a14b5831499	permanent	{}	1cae003a5aba4addbf406ffe8103fcab	8/30/2024 1:52:36 PM	3825fbe9-09d5-c28c-71a1-3a14b5831499	NULL	NULL	False	NULL	NULL
+
+
+
+
+
+6ab2e77a-61f3-ee03-1800-3a14b56c3e4a	NULL	NULL	DawaaNeo API	NULL	DawaaNeo	NULL	["DawaaNeo"]	{}	308973b8964d4b43914c102ae471cb93	8/30/2024 1:25:27 PM	NULL	NULL	NULL	False	NULL	NULL
+

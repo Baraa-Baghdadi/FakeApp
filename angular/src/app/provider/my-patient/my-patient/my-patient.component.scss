@@ -1,0 +1,39 @@
+/* Bootstrap 4 text input with search icon */
+
+.has-search .form-control {
+    padding-left: 2.375rem;
+}
+
+.has-search .form-control-feedback {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    width: 2.375rem;
+    height: 2.375rem;
+    line-height: 2.375rem;
+    text-align: center;
+    pointer-events: none;
+    color: #aaa;
+}
+.btn{
+    background-color: #0baddd;
+}
+.fa{
+    color: white !important;
+}
+.btn-primary{
+    border-color: #0baddd !important;
+}
+.input-group {
+    width: unset !important;
+}
+::ng-deep .ngx-datatable.fixed-header .datatable-header .datatable-header-inner .datatable-header-cell{
+    text-align: center !important;
+}
+::ng-deep .ngx-datatable.material .datatable-body .datatable-body-row .datatable-body-cell{
+    text-align: center !important;
+
+}
+::ng-deep #lpx-wrapper > div.lpx-content-container > div.lpx-content > app-my-patient > div:nth-child(3) > div > ngx-datatable > div > datatable-body > datatable-selection > datatable-scroller > datatable-row-wrapper > datatable-body-row > div.datatable-row-center.datatable-row-group.ng-star-inserted > datatable-body-cell:nth-child(3) > div{
+    direction: ltr !important;
+}

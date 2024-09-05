@@ -1,0 +1,9 @@
+<div class="container">
+  <div class="p-5 text-center">
+    <h1>{{ '::Welcome' | abpLocalization }}</h1>
+    <p class="lead px-lg-5 mx-lg-5">{{ '::LongWelcomeMessage' | abpLocalization }}</p>
+    <div class="d-inline-block p-1 h5 rounded mb-4" role="alert">
+      <button class="btn btn-primary" (click)="downloadQr()">{{"::DownloadQr"|abpLocalization}}</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "DawaaNeo.Blazor.Client": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:57806;http://localhost:57807"
+    }
+  }
+}

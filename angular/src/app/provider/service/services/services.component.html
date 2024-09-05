@@ -1,0 +1,173 @@
+<div class="row" style="align-items: center">
+    <div class="col col-md-6">
+      <h5 class="card-title">
+        {{ '::Menu:Service' | abpLocalization }}
+      </h5>
+    </div>
+    <div class="text-end col col-md-6">
+      <div class="text-lg-end pt-2">
+        <button  id="create" class="btn btn-primary" type="button" (click)="openServiceModal()" >
+          <i class="fa fa-plus me-1"></i>
+          <span>{{ '::NewService' | abpLocalization }}</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="card mt-2">
+    <div class="input-group">
+      <input
+        type="text"
+        class="form-control bg-white"
+        [placeholder]="'::Search' | abpLocalization "
+        [(ngModel)]="serviceFilter.filterText"
+        #search
+      />
+      <div class="input-group-append">
+        <button class="btn" type="button">
+          <i class="fa fa-search"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="card mt-2">
+    <div class="card-body">
+      <ngx-datatable [rows]="services.items" [count]="services.totalCount" [messages]="{emptyMessage: '::NoDatatoDisplay' | abpLocalization}" default>
+        <ngx-datatable-column
+          [name]="'::Actions' | abpLocalization"
+          [maxWidth]="150"
+          [sortable]="false"
+        >
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            <div ngbDropdown container="body" class="d-inline-block">
+              <button
+                class="btn btn-primary btn-sm dropdown-toggle"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                ngbDropdownToggle
+              >
+                <i class="fa fa-cog me-1"></i>{{ '::Actions' | abpLocalization }}
+              </button>
+              <div ngbDropdownMenu>
+                <button ngbDropdownItem (click)="openServiceModal(row.id)">
+                  {{ '::Edit' | abpLocalization }}
+                </button>
+                <button ngbDropdownItem (click)="showDetailsOfPatient(row.id)">
+                  {{ '::ViewDetails' | abpLocalization }}
+                </button>
+                <button ngbDropdownItem (click)="openImage(row.orginalImage)">
+                  {{ '::showImage' | abpLocalization }}
+                </button>
+                <button ngbDropdownItem (click)="downloadImage()">
+                  {{ '::downloadImage' | abpLocalization }}
+                </button>
+              </div>
+            </div>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column [maxWidth]="250" [name]="'::Title' | abpLocalization" prop="title">
+        </ngx-datatable-column>
+        <ngx-datatable-column
+        class="ltr"
+          [name]="'::ArTitle' | abpLocalization"
+          [maxWidth]="380"
+          prop="arTitle"
+        ></ngx-datatable-column>
+        <ngx-datatable-column
+        [maxWidth]="250"
+        [name]="'::isActive' | abpLocalization"
+        prop="isActive"
+      >
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        <span>{{row.isActive === true ? "Yes" : "No"}}</span>
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column
+    [maxWidth]="250"
+    [name]="'::icon' | abpLocalization"
+    prop="icon"
+  >
+  <ng-template let-row="row" ngx-datatable-cell-template>
+    <app-thumbnail [imageUrl]="row.icon"></app-thumbnail>
+  </ng-template>
+</ngx-datatable-column>
+      </ngx-datatable>
+    </div>
+  </div>
+  
+  <!-- End Table -->
+
+
+  <!-- Modal -->
+  <abp-modal [(visible)]="isModalOpen">
+    <ng-template #abpHeader>
+      <h3>{{ (selected ? '::Edit' : '::NewService') | abpLocalization }}</h3>
+    </ng-template>
+  
+    <ng-template #abpBody>
+      <form [formGroup]="form" (ngSubmit)="save()">
+        <div class="mt-2">
+          <label for="title">{{'::Title' | abpLocalization}}</label><span>*</span>
+          <input type="text" id="title" class="form-control" formControlName="title" autofocus>
+        </div>
+
+        <div class="mt-2">
+          <label for="arTitle">{{'::ArTitle' | abpLocalization}}</label><span>*</span>
+          <input type="text" id="arTitle" class="form-control" formControlName="arTitle" >
+        </div>
+
+        <div class="mt-2">
+          <input type="checkbox" id="isAct" class="form-check-input" formControlName="isActive">
+          <label class="form-lable mx-2" for="isAct">{{'::isActive' | abpLocalization}}*</label>
+        </div>
+
+        <div class="form-group col-12 col-md-12 mt-2 ">
+          <div class="input-group mb-3 pointer" (click)="imageError='';uploadProfile.click()">
+            <span class="input-group-text" id="basic-addon1" for="uploadFile">{{'::UploadImage' | abpLocalization}}</span>
+            <input type="text" class="form-control" [readOnly]="true" [placeholder]="'::UpldoadImageAcceptedTypes' | abpLocalization">
+          </div>
+          <input #uploadProfile type="file" accept=".png, .jpeg, .jpg" class="form-control d-none" id="uploadProfile" (change)="fileChangeListener($event)">
+          <div [style]="imageError ? 'visibility:visable' : 'visibility:hidden'">
+            <span class="text-danger">
+              {{'::'+imageError | abpLocalization}}
+            </span>
+          </div>
+          <div class="col-12 mt-2 mb-2" style="display: block;text-align: center;">
+            <div class="image-preview" *ngIf="blop?.value">
+              <img [src]="'data:image/' + fileType.value+';base64,'+blop?.value" height="auto" width="50%">
+            </div>
+          </div>
+        </div>
+      </form>
+    </ng-template>
+  
+    <ng-template #abpFooter>
+      <button type="button" class="btn btn-secondary cancel-btn" abpClose>
+        {{ '::Close' | abpLocalization }}
+      </button>
+  
+      <button class="btn btn-primary" (click)="save()" [disabled]="form.invalid">
+        <i class="fa fa-check mr-1"></i>
+        {{ '::Save' | abpLocalization }}
+      </button>
+    </ng-template>
+  </abp-modal>
+
+
+   <!-- Modal For Show Orginal Image: -->
+   <abp-modal [(visible)]="isModalOpenForShowImage">
+    <ng-template #abpHeader>
+      <h3>{{  '::orginalImage' | abpLocalization }}</h3>
+    </ng-template>
+  
+    <ng-template #abpBody>
+      <div class="d-flex justify-content-center">
+        <img class="text-center"style="max-width: 70%;" [src]="'data:image/'+png+';base64,'+orginalImage">
+      </div>
+    </ng-template>
+  
+    <ng-template #abpFooter>
+      <button type="button" class="btn btn-secondary cancel-btn" abpClose>
+        {{ '::Close' | abpLocalization }}
+      </button>
+    </ng-template>
+  </abp-modal>

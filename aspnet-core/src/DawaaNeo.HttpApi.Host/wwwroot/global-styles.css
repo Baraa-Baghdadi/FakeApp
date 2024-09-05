@@ -1,0 +1,96 @@
+/* Your Global Styles */
+:root {
+    --lpx-theme-light-bg: url("/images/logo/leptonx/background.png");
+    --lpx-theme-dim-bg: url("/images/logo/leptonx/background.png");
+    --lpx-theme-dark-bg: url("/images/logo/leptonx/background.png");
+}
+
+.lpx-content {
+    background-image: url("/images/logo/leptonx/background.png");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: space;
+    position: relative;
+    /*padding-top: 5px;*/
+    min-height: 100vh;
+}
+.lpx-content::before {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-color: whitesmoke;
+    opacity: 0.9;
+}
+
+#lpx-wrapper > div.lpx-content-container.m-0 > div.lpx-content{
+    padding-top : 10px !important ;
+}
+
+.btn-primary {
+    --bs-btn-bg: #4ebece;
+}
+
+.btn {
+    border: #4ebece;
+
+}
+
+.btn:hover {
+    background-color: #0087a1;
+    border-color: #0087a1;
+}
+
+#PasswordVisibilityButton{
+    background-color:gray;
+}
+#lpx-wrapper > div.lpx-content-container.m-0 > div.lpx-content > div > div > div > div.card.mt-3.shadow-sm.rounded{
+    height:517px;
+}
+
+#lpx-wrapper > div.lpx-content-container.m-0 > div.lpx-content > div > div > div > div.card.mt-3.shadow-sm.rounded > div > strong > a,
+#lpx-wrapper > div.lpx-content-container.m-0 > div.lpx-content > div > div > div > div.card.mt-3.shadow-sm.rounded > div > form > div.row > div.text-end.col > a,
+#AbpTenantSwitchLink {
+    color: #0087a1;
+}
+
+#AbpTenantSwitchLink:hover {
+    background-color: white;
+}
+
+#lpx-wrapper > div.lpx-content-container.m-0 > div.lpx-content > div > div > div > hr{
+    display : none !important; 
+
+}
+#lpx-wrapper > div.lpx-content-container.m-0 > div.lpx-topbar-container > div {
+    display: none !important;
+}
+#lpx-wrapper > div.lpx-content-container.m-0 > div.lpx-content > div > div > div > div.card.mt-3.shadow-sm.rounded > div > strong{
+    display : none !important;
+}
+#lpx-wrapper > div.lpx-content-container.m-0 > div.lpx-content > div > div > div > div.card.mt-3.shadow-sm.rounded > div {
+    padding-top:40px !important;
+}
+#lpx-wrapper > div.lpx-content-container.m-0 > div.lpx-content > div > div > div > div.card.mt-3.shadow-sm.rounded{
+    height : 420px !important;
+}
+#lpx-wrapper > div.lpx-content-container.m-0 > div.lpx-content > div > div > div > div.card.mt-3.shadow-sm.rounded > div > form > div.d-grid > button{
+    margin-top : 0px !important;
+}
+#lpx-wrapper > div.lpx-content-container.m-0 > div.lpx-content > div > div > div > div.card.mt-3.shadow-sm.rounded > div > form > div.mb-2 {
+    margin-bottom: 0.75rem !important;
+}
+#lpx-wrapper > div.lpx-content-container.m-0 > div.lpx-content > div > div > div > div.card.mt-3.shadow-sm.rounded {
+    margin-top: -0.5rem !important;
+}
+#lpx-wrapper > div.lpx-content-container.m-0 > div.lpx-content{
+    padding : 0 !important;
+}
+html{
+    overflow-y : hidden !important;
+}
+#lpx-wrapper > div.lpx-content-container.m-0 > div.lpx-content > div > div > div > div.card.mb-3{
+    margin-top : 20px;
+}
