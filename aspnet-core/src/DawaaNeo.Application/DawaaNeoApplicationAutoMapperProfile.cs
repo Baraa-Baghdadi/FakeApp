@@ -9,6 +9,7 @@ using Microsoft.Extensions.Localization;
 using DawaaNeo.Localization;
 using System.Globalization;
 using DawaaNeo.Services;
+using DawaaNeo.Notifications;
 
 namespace DawaaNeo;
 
@@ -54,5 +55,8 @@ public class DawaaNeoApplicationAutoMapperProfile : Profile , ISingletonDependen
 
         CreateMap<OrderItem, OrderItemDto>().ReverseMap();
         CreateMap<DawaaNeo.Services.Service, ServiceDto>().ReverseMap();
+
+
+        CreateMap<Notification, ProviderNotificationDto>();
     }
 }

@@ -1,25 +1,29 @@
 <div class="row">
   <!-- Bell -->
-   <div ngbDropdown class="col-2 position-relative cpointer">
+   <div ngbDropdown class="col-2 position-relative" (click)="makeAllMsgAsReaded()">
     <div class="notification" data-toggle="dropdown" aria-haspopup="true" ngbDropdownToggle>
-      <i class="fa fa-bell-o bell mt-1" ></i>
-      <span style="top:5px !important;font-size:10px;" class="position-absolute start-100 translate-middle  badge rounded-pill bg-danger">
-        1
+      <i class="fa fa-bell-o bell mt-1 cpointer" ></i>
+      <span style="top:5px !important;font-size:10px;" 
+        class="position-absolute start-100 translate-middle  badge rounded-pill bg-danger"
+        *ngIf="(notificationListener.unreadNotificationCount$ | async) as count">
+        {{count}}
       </span>
     </div>
-    <div ngbDropdownMenu>
+    <div ngbDropdownMenu class="list">
       <!-- Notifications List -->
-      <div class="notifications-list">
-        <h5>{{"::Notofications" | abpLocalization}}</h5>
-        <ul>
-          <li>
-            <a class="notification">
-              <i class="fas fa-bell"></i>
-              <span>New message from John Doe</span>
-              <!-- <small>5 minutes ago</small> -->
-            </a>
-          </li>
-        </ul>
+      <div ngbDropdownItem class="notifications-list">
+        <h5 *ngIf="(notificationListener.unreadNotificationCount$ | async) as count">{{"::Notofications" | abpLocalization}}</h5>
+        <div>
+          <div *ngFor="let item of allMsgs">
+            <div class="notification d-block">
+              <div class="overflow-example pt-3 cpointer">
+                <i class="fas fa-bell" style="color: #0baddd;font-size: 18px;"></i>
+                <span class="ms-1">{{"::"+item.content | abpLocalization}}</span>
+              </div>
+            </div>
+          </div>
+          
+        </div>
       </div>
     </div>
    </div>

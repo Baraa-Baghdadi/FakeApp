@@ -10,6 +10,8 @@ namespace DawaaNeo.Notifications
     public interface INotificationRepository : IRepository<Notification,Guid>
     {
         Task<(IEnumerable<Notification>,int)> GetUserNotifications(Guid userId,int skipCount,int maxResultCount
-            ,string? sorting); 
+            ,string? sorting);
+        Task<(IEnumerable<Notification>, int)> GetProviderNotifications(Guid tenantId, int skipCount, int maxResultCount
+            , string? sorting);
     }
 }

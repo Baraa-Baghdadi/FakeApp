@@ -1053,6 +1053,258 @@
             }
           }
         },
+        "DawaaNeo.Notifications.NotificationProviderAppService": {
+          "controllerName": "NotificationProvider",
+          "controllerGroupName": "NotificationProvider",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "DawaaNeo.Notifications.NotificationProviderAppService",
+          "interfaces": [
+            {
+              "type": "DawaaNeo.Notifications.INotificationProviderAppService",
+              "name": "INotificationProviderAppService",
+              "methods": [
+                {
+                  "name": "CreateAddedYouToMyPharmacytNotification",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "content",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "type",
+                      "typeAsString": "DawaaNeo.Notifications.NotificationTypeEnum, DawaaNeo.Domain.Shared",
+                      "type": "DawaaNeo.Notifications.NotificationTypeEnum",
+                      "typeSimple": "DawaaNeo.Notifications.NotificationTypeEnum",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                },
+                {
+                  "name": "GetListOfProviderNotification",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto, Volo.Abp.Ddd.Application.Contracts",
+                      "type": "Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto",
+                      "typeSimple": "Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "Volo.Abp.Application.Dtos.PagedResultDto<DawaaNeo.Notifications.ProviderNotificationDto>",
+                    "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<DawaaNeo.Notifications.ProviderNotificationDto>"
+                  }
+                },
+                {
+                  "name": "MarkAllAsRead",
+                  "parametersOnMethod": [],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                },
+                {
+                  "name": "GetCountOfUnreadingMsgAsync",
+                  "parametersOnMethod": [],
+                  "returnValue": {
+                    "type": "System.Int32",
+                    "typeSimple": "number"
+                  }
+                }
+              ]
+            }
+          ],
+          "actions": {
+            "CreateAddedYouToMyPharmacytNotificationByIdAndContentAndType": {
+              "uniqueName": "CreateAddedYouToMyPharmacytNotificationByIdAndContentAndType",
+              "name": "CreateAddedYouToMyPharmacytNotification",
+              "httpMethod": "POST",
+              "url": "api/app/notification-provider/{id}/added-you-to-my-pharmacyt-notification",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "content",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "type",
+                  "typeAsString": "DawaaNeo.Notifications.NotificationTypeEnum, DawaaNeo.Domain.Shared",
+                  "type": "DawaaNeo.Notifications.NotificationTypeEnum",
+                  "typeSimple": "DawaaNeo.Notifications.NotificationTypeEnum",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "content",
+                  "name": "content",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "type",
+                  "name": "type",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "DawaaNeo.Notifications.INotificationProviderAppService"
+            },
+            "GetListOfProviderNotificationByInput": {
+              "uniqueName": "GetListOfProviderNotificationByInput",
+              "name": "GetListOfProviderNotification",
+              "httpMethod": "GET",
+              "url": "api/app/notification-provider/of-provider-notification",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto, Volo.Abp.Ddd.Application.Contracts",
+                  "type": "Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto",
+                  "typeSimple": "Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "Sorting",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "SkipCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "MaxResultCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Application.Dtos.PagedResultDto<DawaaNeo.Notifications.ProviderNotificationDto>",
+                "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<DawaaNeo.Notifications.ProviderNotificationDto>"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "DawaaNeo.Notifications.INotificationProviderAppService"
+            },
+            "MarkAllAsRead": {
+              "uniqueName": "MarkAllAsRead",
+              "name": "MarkAllAsRead",
+              "httpMethod": "POST",
+              "url": "api/app/notification-provider/mark-all-as-read",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "DawaaNeo.Notifications.INotificationProviderAppService"
+            },
+            "GetCountOfUnreadingMsgAsync": {
+              "uniqueName": "GetCountOfUnreadingMsgAsync",
+              "name": "GetCountOfUnreadingMsgAsync",
+              "httpMethod": "GET",
+              "url": "api/app/notification-provider/count-of-unreading-msg",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "System.Int32",
+                "typeSimple": "number"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "DawaaNeo.Notifications.INotificationProviderAppService"
+            }
+          }
+        },
         "DawaaNeo.Orders.OrderAppService": {
           "controllerName": "Order",
           "controllerGroupName": "Order",
@@ -6374,6 +6626,89 @@
       ],
       "genericArguments": null,
       "properties": null
+    },
+    "DawaaNeo.Notifications.NotificationTypeEnum": {
+      "baseType": "System.Enum",
+      "isEnum": true,
+      "enumNames": [
+        "Order",
+        "NewPatient"
+      ],
+      "enumValues": [
+        0,
+        1
+      ],
+      "genericArguments": null,
+      "properties": null
+    },
+    "DawaaNeo.Notifications.ProviderNotificationDto": {
+      "baseType": "Volo.Abp.Application.Dtos.EntityDto<System.Guid>",
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": [
+        {
+          "name": "EntityId",
+          "jsonName": null,
+          "type": "System.Guid?",
+          "typeSimple": "string?",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "Title",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "Content",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "TenantId",
+          "jsonName": null,
+          "type": "System.Guid?",
+          "typeSimple": "string?",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "CreatedOn",
+          "jsonName": null,
+          "type": "System.Decimal",
+          "typeSimple": "number",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        }
+      ]
     },
     "DawaaNeo.Orders.CreateOrderDto": {
       "baseType": null,

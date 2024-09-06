@@ -26,5 +26,17 @@ namespace DawaaNeo.Notifications
             notification = notification.Skip(skipCount).Take(maxResultCount);
             return (notification, count);
         }
+        public async Task<(IEnumerable<Notification>, int)> GetProviderNotifications(Guid tenantId, int skipCount, int maxResultCount, string? sorting)
+        {
+            var notification = (await GetQueryableAsync())
+                .WhereIf(true, n => n.TenantId == tenantId)
+                .OrderBy(string.IsNullOrEmpty(sorting) ? NotificationConst.GetDefaultSorting(false) : sorting)
+                .AsEnumerable();
+
+            var count = notification.Count();
+            notification = notification.Skip(skipCount).Take(maxResultCount);
+            return (notification, count);
+        }
+
     }
 }
