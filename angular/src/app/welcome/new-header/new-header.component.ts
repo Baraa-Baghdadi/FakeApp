@@ -1,15 +1,15 @@
-import { AuthService, getLocaleDirection, LocalizationService, SessionStateService } from '@abp/ng.core';
+import { getLocaleDirection, LocalizationService, SessionStateService } from '@abp/ng.core';
 import { LocaleDirection } from '@abp/ng.theme.shared';
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, map } from 'rxjs';
+import { NotificationListenerService } from 'src/app/services/notification/notification-listener.service';
 
 @Component({
   selector: 'app-new-header',
   templateUrl: './new-header.component.html',
   styleUrl: './new-header.component.scss'
 })
-export class NewHeaderComponent {
+export class NewHeaderComponent implements OnInit {
   availableLangs = [{value:"en",name:"English"},{value:"ar",name:"العربية"}];
   selectedLang = this.sessionState.getLanguage();
   labelOfSelectedLang = this.selectedLang === "en" ? "English" : "العربية" ;
@@ -18,14 +18,22 @@ export class NewHeaderComponent {
   private dir = new BehaviorSubject<LocaleDirection>('ltr');
   dir$ = this.dir.asObservable();
 
-  constructor(private authService:AuthService,
-    private router:Router,
-    private sessionState:SessionStateService,
-    private localizationService : LocalizationService) { 
-      this.listenToLanguageChanges();
-     }
+  allMsgs : any;
 
-    selectLang(lang:any){
+  ngOnInit(): void {
+    this.getUnreadedMsg();
+    this.getMsgList();
+  }
+
+  constructor(
+    private sessionState:SessionStateService,
+    private localizationService : LocalizationService,
+    public notificationListener : NotificationListenerService) { 
+      this.listenToLanguageChanges();
+    }
+    
+    // For Select language:
+   selectLang(lang:any){
       this.sessionState.setLanguage(lang);
       this.selectedLang = this.sessionState.getLanguage();
       this.labelOfSelectedLang = this.selectedLang === "en" ? "English" : "العربية" ;
@@ -42,5 +50,21 @@ export class NewHeaderComponent {
     private setBodyDir(dir : LocaleDirection){
       document.body.dir = dir;
       document.dir = dir;
+    }
+
+    // For Notifications:
+    getUnreadedMsg(){
+      this.notificationListener.getUnreadedMsg();         
+    }
+
+    makeAllMsgAsReaded(){
+      this.notificationListener.makeAllMsgAsReaded();
+    }
+
+    getMsgList(){
+      this.notificationListener.getMsgList();
+      this.notificationListener.NotificationList.subscribe((data:any) => {
+        this.allMsgs = data.items;
+      })
     }
 }

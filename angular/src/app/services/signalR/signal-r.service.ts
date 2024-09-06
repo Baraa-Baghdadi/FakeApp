@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import * as signalR from '@microsoft/signalr';
 import { OAuthService } from 'angular-oauth2-oidc';
-import { NotificationListenerService } from './notification-listener.service';
+import { NotificationListenerService } from '../notification/notification-listener.service';
 import { ToastComponent, ToasterService } from '@abp/ng.theme.shared';
 
 @Injectable({
@@ -27,8 +27,15 @@ export class SignalRService {
     });
 
     connection.on("PatientAddedYouMsg", () => {
-      console.log("PatientAddedYouMsg");
+      // Send new event for update data in table:
       this.NotificationListener.reciveNewPatientListener.next(true);
+      // update notification list:
+      setTimeout(() => {
+        this.NotificationListener.getMsgList();
+      }, 1000);
+      // increase count of unread MSG:
+      this.NotificationListener.increaseCount();
+      // show toaster:
       this.toaster.info("::newPatientAddedYou","",{life: 5000,closable:false});     
     });
   }

@@ -34,6 +34,7 @@
     "orginalImage": "الصورة الأصلية",
     "downloadImage": "تحميل الصورة",
     "newPatientAddedYou": "تمت إضافة صيدليتك من قبل مريض جديد",
-    "Notofications": "الإشعارات"
+    "Notofications": "الإشعارات",
+    "noNotifications": "لا يوجد إشعارات"
   }
 }
