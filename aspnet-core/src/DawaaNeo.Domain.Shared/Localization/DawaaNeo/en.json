@@ -35,6 +35,7 @@
     "showImage": "Show Image",
     "orginalImage": "Orginal Image",
     "downloadImage": "Download Image",
-    "newPatientAddedYou": "A new patient has been added to your pharmacy"
+    "newPatientAddedYou": "A new patient has been added to your pharmacy",
+    "Notofications": "Notifications"
   }
 }
