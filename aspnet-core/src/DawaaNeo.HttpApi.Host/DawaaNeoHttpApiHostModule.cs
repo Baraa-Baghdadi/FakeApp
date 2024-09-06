@@ -199,6 +199,27 @@ public class DawaaNeoHttpApiHostModule : AbpModule
         app.UseStaticFiles();
         app.UseRouting();
         app.UseCors();
+
+        // For signalR:
+        app.Use(async (httpContext, next) =>
+        {
+            var accessToken = httpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
+            if (string.IsNullOrEmpty(accessToken))
+            {
+                accessToken = httpContext.Request.Query["access_token"];
+            }
+
+            var path = httpContext.Request.Path;
+
+            if (!string.IsNullOrEmpty(accessToken) && path.StartsWithSegments("/notify"))
+            {
+                httpContext.Request.Headers["Authorization"] = "Bearer " + accessToken;
+            }
+
+            await next();
+        });
+
+
         app.UseAuthentication();
         app.UseAbpOpenIddictValidation();
 

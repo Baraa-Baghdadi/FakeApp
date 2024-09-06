@@ -1,0 +1,14 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Volo.Abp.Application.Services;
+
+namespace DawaaNeo.Notifications
+{
+    public interface INotificationProviderAppService : IApplicationService
+    {
+        Task CreateAddedYouToMyPharmacytNotification(Guid id, string content, NotificationTypeEnum type);
+    }
+}

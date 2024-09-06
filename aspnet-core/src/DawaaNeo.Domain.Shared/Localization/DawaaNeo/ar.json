@@ -32,6 +32,7 @@
     "ViewDetails": "مشاهدة التفاصيل",
     "showImage": "مشاهدة الصورة الأصلية",
     "orginalImage": "الصورة الأصلية",
-    "downloadImage": "تحميل الصورة"
+    "downloadImage": "تحميل الصورة",
+    "newPatientAddedYou": "تمت إضافة صيدليتك من قبل مريض جديد"
   }
 }

@@ -24,7 +24,8 @@ namespace DawaaNeo;
     typeof(AbpFeatureManagementApplicationModule),
     typeof(AbpSettingManagementApplicationModule),
     typeof(AbpLocalizationModule),
-    typeof(AbpBlobStoringModule)
+    typeof(AbpBlobStoringModule),
+    typeof(AbpTenantManagementApplicationModule)
     )]
 public class DawaaNeoApplicationModule : AbpModule
 {

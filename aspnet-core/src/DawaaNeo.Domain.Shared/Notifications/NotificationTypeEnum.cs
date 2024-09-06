@@ -8,6 +8,7 @@ namespace DawaaNeo.Notifications
 {
     public enum NotificationTypeEnum
     {
-        Order
+        Order,
+        NewPatient
     }
 }
