@@ -1,4 +1,6 @@
 using DawaaNeo.ApiResponse;
+using DawaaNeo.Notifications;
+using DawaaNeo.Orders;
 using DawaaNeo.Providers;
 using DawaaNeo.Providers.Mobile;
 using Microsoft.AspNetCore.Authorization;
@@ -8,6 +10,7 @@ using System.Threading.Tasks;
 using Volo.Abp;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
+using static DawaaNeo.Permissions.DawaaNeoPermissions;
 
 namespace DawaaNeo.Patients.Mobile
 {
@@ -21,6 +24,7 @@ namespace DawaaNeo.Patients.Mobile
         protected ICurrentPatient _currentPatient;
         protected PatientManager _patientManager;
         protected IPatientAddressRepository _patientAddressRepository;
+        protected INotificationProviderAppService _notificationProviderAppService;
         public PatientMobileAppService(
             IPatientRepository patientRepository,
             IPatientProviderRepository patientProviderRepository,
@@ -28,7 +32,8 @@ namespace DawaaNeo.Patients.Mobile
             IApiResponse apiResponse,
             ICurrentPatient currentPatient
             , PatientManager patientManager,
-            IPatientAddressRepository patientAddressRepository
+            IPatientAddressRepository patientAddressRepository,
+            INotificationProviderAppService notificationProviderAppService
             )
         {
             _apiResponse = apiResponse;
@@ -38,6 +43,7 @@ namespace DawaaNeo.Patients.Mobile
             _currentPatient = currentPatient;
             _patientManager = patientManager;
             _patientAddressRepository = patientAddressRepository;
+            _notificationProviderAppService = notificationProviderAppService;
         }
 
         #region patient address
@@ -154,7 +160,12 @@ namespace DawaaNeo.Patients.Mobile
                 }
             }
             PatientProvider patientProvider = new PatientProvider(GuidGenerator.Create(), patient.Id, input.ProviderId, DateTime.Now, 0);
-            await _patientProviderRepository.InsertAsync(patientProvider);
+            
+            await _patientProviderRepository.InsertAsync(patientProvider,true);
+
+            // Send Notification For Provider:
+            await _notificationProviderAppService.CreateAddedYouToMyPharmacytNotification(patientProvider.Id, 
+                "newPatientAddedYou",NotificationTypeEnum.NewPatient);
             return _apiResponse.Success(true);
         }
 

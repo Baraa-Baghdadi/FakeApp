@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angula
 import { debounceTime, distinctUntilChanged, fromEvent, map, switchMap, tap } from 'rxjs';
 import { PagedResultDto } from '@abp/ng.core';
 import { GetPatientInput, PatientProviderDto, PatientService } from '@proxy/patients';
+import { NotificationListenerService } from 'src/app/services/signalR/notification-listener.service';
 @Component({
   selector: 'app-my-patient',
   templateUrl: './my-patient.component.html',
@@ -16,10 +17,12 @@ export class MyPatientComponent {
 
   isModalOpen =false;
 
-  constructor(private service : PatientService ){}
+  constructor(private service : PatientService ,private NotificationListener : NotificationListenerService){}
 
   ngOnInit() {
     this.getAllMyPatient();
+    //recive notification:
+    this.reviceNewPatient();
   }
 
   getAllMyPatient(){
@@ -49,6 +52,11 @@ export class MyPatientComponent {
   }
 
   showDetailsOfPatient(rowId){
+  }
 
+  reviceNewPatient(){
+    this.NotificationListener.reciveNewPatientListener.subscribe((data) => {
+      this.getAllMyPatient();
+    })
   }
 }

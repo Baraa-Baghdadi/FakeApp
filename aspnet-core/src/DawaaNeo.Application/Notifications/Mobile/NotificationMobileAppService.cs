@@ -20,9 +20,9 @@ using Volo.Abp.Identity;
 using Volo.Abp.MultiTenancy;
 using Volo.Abp.Users;
 
-namespace DawaaNeo.Notifications
+namespace DawaaNeo.Notifications.Mobile
 {
-    [RemoteService (IsEnabled = false)]
+    [RemoteService(IsEnabled = false)]
     public class NotificationMobileAppService : DawaaNeoAppService, INotificationMobileAppService
     {
         private readonly IdentityUserManager _userManager;
@@ -36,10 +36,10 @@ namespace DawaaNeo.Notifications
         private readonly IApiResponse _apiResponse;
         private readonly ICurrentUser _currentUser;
 
-        public NotificationMobileAppService(IdentityUserManager userManager, 
+        public NotificationMobileAppService(IdentityUserManager userManager,
             INotificationRepository notificationRepo, IDeviceRepository deviceRepo, DataFilter datafilter,
             IRepository<Order, Guid> orderRepo,
-            ICurrentPatient currentPatient, IProviderRepository providerRepo, IPatientRepository patientRepo, 
+            ICurrentPatient currentPatient, IProviderRepository providerRepo, IPatientRepository patientRepo,
             IApiResponse apiResponse, ICurrentUser currentUser)
         {
             _userManager = userManager;
@@ -57,7 +57,7 @@ namespace DawaaNeo.Notifications
         public async Task CreatOrderNotification(Guid orderId, string title, string content, NotificationTypeEnum type, Dictionary<string, string> extraproperties)
         {
             Provider? provider;
-            Volo.Abp.Identity.IdentityUser? user;
+            IdentityUser? user;
             var order = await _orderRepo.GetAsync(row => row.Id == orderId)
                 ?? throw new UserFriendlyException(DawaaNeoDomainErrorCodes.GeneralErrorCode.NotFound);
 
@@ -74,7 +74,8 @@ namespace DawaaNeo.Notifications
                     ?? throw new UserFriendlyException(DawaaNeoDomainErrorCodes.GeneralErrorCode.NotFound);
             }
 
-            var notification = new Notification {
+            var notification = new Notification
+            {
                 EntityId = orderId,
                 Title = title,
                 Content = content,
@@ -94,15 +95,15 @@ namespace DawaaNeo.Notifications
                 }
             }
 
-            await _notificationRepo.InsertAsync(notification,true);
+            await _notificationRepo.InsertAsync(notification, true);
 
             // Send Notification Now:
 
             try
             {
-                var messagBody = _getMessageBody(content, order.OrderId, provider.PharmacyName,patient.CurrentLanguage);
-                await SendNotification(user.Id, title, messagBody, 
-                    new Dictionary<string, string> { { "notificationId", notification.Id.ToString() }, { "entityId", order.Id.ToString() }, { "orderId",order.OrderId } });
+                var messagBody = _getMessageBody(content, order.OrderId, provider.PharmacyName, patient.CurrentLanguage);
+                await SendNotification(user.Id, title, messagBody,
+                    new Dictionary<string, string> { { "notificationId", notification.Id.ToString() }, { "entityId", order.Id.ToString() }, { "orderId", order.OrderId } });
             }
 
             catch { }
@@ -110,7 +111,7 @@ namespace DawaaNeo.Notifications
 
         public async Task<Response<PagedResultDto<NotificationDto>>> GetUserNotifications(PagedAndSortedResultRequestDto input)
         {
-            var currentUserId = CurrentUser.Id ?? 
+            var currentUserId = CurrentUser.Id ??
                 throw new UserFriendlyException(DawaaNeoDomainErrorCodes.GeneralErrorCode.NotFound);
             (var notification, int count) = await _notificationRepo.GetUserNotifications(currentUserId, input.SkipCount,
                 input.MaxResultCount, input.Sorting);
@@ -144,17 +145,17 @@ namespace DawaaNeo.Notifications
 
         public async Task<Response<int>> UnReadNotificationCount()
         {
-            var currentUser = CurrentUser.Id ?? 
+            var currentUser = CurrentUser.Id ??
                 throw new UserFriendlyException(DawaaNeoDomainErrorCodes.GeneralErrorCode.NotFound);
             var count = await _notificationRepo.CountAsync(n => n.UserId == currentUser && !n.IsRead);
             return _apiResponse.Success(count);
-            
+
         }
 
 
         #region Methods
 
-        string _getMessageBody(string content,string entityId , string pharmacyName, ApplicationLanguage culture)
+        string _getMessageBody(string content, string entityId, string pharmacyName, ApplicationLanguage culture)
         {
             var orginalCulture = CultureInfo.CurrentCulture;
             if (culture == ApplicationLanguage.ar)
@@ -170,7 +171,7 @@ namespace DawaaNeo.Notifications
         }
 
         // Send Notification:
-        private async Task SendNotification(Guid userId,string title,string content, Dictionary<string, string> extraProperties)
+        private async Task SendNotification(Guid userId, string title, string content, Dictionary<string, string> extraProperties)
         {
             var devices = await _deviceRepo.GetListAsync(d => d.UserId == userId);
 
@@ -185,7 +186,7 @@ namespace DawaaNeo.Notifications
                         {
                             Title = title,
                             Body = content
-                        } ,
+                        },
                         Data = extraProperties,
                         Token = device.DeviceToken
                     });
@@ -202,12 +203,12 @@ namespace DawaaNeo.Notifications
 
                 }
                 // when user uninstall application without logOut:
-                catch(FirebaseMessagingException ex)
+                catch (FirebaseMessagingException ex)
                 {
                     Logger.LogCritical(ex.Message + " " + (ex.InnerException is null ? "" : ex.InnerException.Message));
                     await _deviceRepo.DeleteAsync(device, true);
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     Logger.LogCritical(e.Message + " " + (e.InnerException is null ? "" : e.InnerException.Message));
 

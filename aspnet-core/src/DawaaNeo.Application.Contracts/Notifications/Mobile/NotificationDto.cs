@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp.Application.Dtos;
 
-namespace DawaaNeo.Notifications
+namespace DawaaNeo.Notifications.Mobile
 {
     public class NotificationDto : EntityDto<Guid>
     {

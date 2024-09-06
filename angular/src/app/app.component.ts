@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.authService.isAuthenticated){
-      this.signalR.connectToSignalR();
+      this.signalR.connect();
     }
   }
 }
