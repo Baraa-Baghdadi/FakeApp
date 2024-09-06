@@ -1,0 +1,41 @@
+<div class="row">
+  <!-- Bell -->
+   <div ngbDropdown class="col-2 position-relative cpointer">
+    <div class="notification" data-toggle="dropdown" aria-haspopup="true" ngbDropdownToggle>
+      <i class="fa fa-bell-o bell mt-1" ></i>
+      <span style="top:5px !important;font-size:10px;" class="position-absolute start-100 translate-middle  badge rounded-pill bg-danger">
+        1
+      </span>
+    </div>
+    <div ngbDropdownMenu>
+      <!-- Notifications List -->
+      <div class="notifications-list">
+        <h5>{{"::Notofications" | abpLocalization}}</h5>
+        <ul>
+          <li>
+            <a class="notification">
+              <i class="fas fa-bell"></i>
+              <span>New message from John Doe</span>
+              <!-- <small>5 minutes ago</small> -->
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+   </div>
+  <!-- Chose language -->
+  <div class="col-8">
+    <div ngbDropdown  class="btn-group ms-auto dropdown w-100">
+      <button class="dropdown-toggle btn btn-sm languageBtnBg"
+      data-toggle="dropdown" aria-haspopup="true" ngbDropdownToggle>
+      <i class="bi bi-translate me-1"></i>{{labelOfSelectedLang}}
+    </button>
+    <div ngbDropdownMenu>
+      <button ngbDropdownItem *ngFor="let lang of availableLangs" (click)="selectLang(lang.value)">
+        {{lang.name}}
+      </button>
+    </div>
+  </div>
+  </div>
+</div>
+<!-- Notification List -->

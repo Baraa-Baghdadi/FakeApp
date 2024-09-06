@@ -1,0 +1,67 @@
+.bell{
+    font-size: 20px;
+}
+.count{
+    font-size: 10px !important;
+    top:5px !important;
+}
+.notification::after {
+    content: none !important;
+    display: none !important;
+}
+
+
+// Style For Notification List:
+.notifications-list {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    width: 300px; /* adjust width as needed */
+  }
+  
+  .notifications-list h5 {
+    margin-top: 0;
+    color: #124163;
+  }
+  
+  .notifications-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .notifications-list li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .notifications-list li:last-child {
+    border-bottom: none;
+  }
+  
+  .notification {
+    display: flex;
+    align-items: center;
+    color: #0baddd; 
+    text-decoration: none;
+  }
+  
+  .notification:hover {
+    text-decoration: none;
+  }
+  
+  .notification i {
+    font-size: 18px;
+    margin-right: 10px;
+  }
+  
+  .notification span {
+    font-size: 14px;
+  }
+  
+  .notification small {
+    font-size: 12px;
+    color: #666;
+  }
+// end Style For Notification List:

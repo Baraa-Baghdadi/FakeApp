@@ -5,12 +5,14 @@ import { SharedModule } from '../shared/shared.module';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { WelcomeRoutingModule } from './welcome-routing.module';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { NewHeaderComponent } from './new-header/new-header.component';
 
 
 
 @NgModule({
   declarations: [
-    WelcomeComponent
+    WelcomeComponent,
+    NewHeaderComponent
   ],
   imports: [
     CommonModule,
