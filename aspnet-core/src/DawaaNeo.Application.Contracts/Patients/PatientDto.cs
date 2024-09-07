@@ -10,6 +10,9 @@ namespace DawaaNeo.Patients
     {
         public string MobileNumber { get; set; } = null!;
         public string CountryCode { get; set; } = null!;
+        public string? FullMobileNumber { get; set; }
+        public string? Name { get; set; }
+        public DateTime? Dob { get; set; }
         public string ConcurrencyStamp { get; set; } = null!;
         public List<PatientAddressDto> PatientAddresses { get; set; }
         public List<PatientProviderDto> PatientProviders { get; set; }

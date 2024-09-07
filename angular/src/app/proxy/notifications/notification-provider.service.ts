@@ -11,11 +11,12 @@ export class NotificationProviderService {
   apiName = 'Default';
   
 
-  createAddedYouToMyPharmacytNotificationByIdAndContentAndType = (id: string, content: string, type: NotificationTypeEnum, config?: Partial<Rest.Config>) =>
+  createAddedYouToMyPharmacytNotificationByIdAndContentAndTypeAndExtraproperties = (id: string, content: string, type: NotificationTypeEnum, extraproperties: Record<string, string>, config?: Partial<Rest.Config>) =>
     this.restService.request<any, void>({
       method: 'POST',
       url: `/api/app/notification-provider/${id}/added-you-to-my-pharmacyt-notification`,
       params: { content, type },
+      body: extraproperties,
     },
     { apiName: this.apiName,...config });
   

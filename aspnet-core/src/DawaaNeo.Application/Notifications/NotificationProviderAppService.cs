@@ -2,6 +2,7 @@
 using DawaaNeo.Notifications.Mobile;
 using DawaaNeo.Patients;
 using DawaaNeo.Providers;
+using FirebaseAdmin.Messaging;
 using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Collections.Generic;
@@ -15,19 +16,23 @@ using Volo.Abp.MultiTenancy;
 
 namespace DawaaNeo.Notifications
 {
+
     public class NotificationProviderAppService : DawaaNeoAppService, INotificationProviderAppService
     {
         private readonly IRepository<PatientProvider> _patientProviderRepo;
         private readonly IRepository<Provider> _providerRepo;
+        private readonly IRepository<Patient> _patientRepo;
         private readonly INotificationRepository _notificationRepo;
         private readonly IHubContext<BroadcastHub, IHubClient> _hubContext;
         private readonly BroadcastHub _hub;
         private readonly IDataFilter _dataFilter;
 
+       
         public NotificationProviderAppService(IRepository<PatientProvider> patientProviderRepo,
             INotificationRepository notificationRepo,
             BroadcastHub hub, IRepository<Provider> providerRepo,
-            IHubContext<BroadcastHub, IHubClient> hubContext, IDataFilter dataFilter)
+            IHubContext<BroadcastHub, IHubClient> hubContext, IDataFilter dataFilter,
+            IRepository<Patient> patientRepo)
         {
             _patientProviderRepo = patientProviderRepo;
             _notificationRepo = notificationRepo;
@@ -35,13 +40,16 @@ namespace DawaaNeo.Notifications
             _providerRepo = providerRepo;
             _hubContext = hubContext;
             _dataFilter = dataFilter;
+            _patientRepo = patientRepo;
         }
 
-        public async Task CreateAddedYouToMyPharmacytNotification(Guid id, string content, NotificationTypeEnum type)
+        public async Task CreateAddedYouToMyPharmacytNotification(Guid id, string content, NotificationTypeEnum type, Dictionary<string, string> extraproperties)
         {
             // Get patientProvider:
             var patientProvider = await _patientProviderRepo.FirstOrDefaultAsync(row => row.Id == id)
                 ?? throw new UserFriendlyException(L[DawaaNeoDomainErrorCodes.GeneralErrorCode.NotFound]);
+
+            var patient = await _patientRepo.FirstOrDefaultAsync(row => row.Id == patientProvider.PatientId);
 
             using (_dataFilter.Disable<IMultiTenant>())
             {
@@ -64,6 +72,15 @@ namespace DawaaNeo.Notifications
                     CreatedOn = ServiceHelper.getTimeSpam(DateTime.UtcNow)
                 };
 
+                // save json in extraProperty Column in DB:
+                if (!extraproperties.IsNullOrEmpty())
+                {
+                    foreach (var item in extraproperties.Keys)
+                    {
+                        notification.SetProperty(item, extraproperties[item]);
+                    }
+                }
+
                 await _notificationRepo.InsertAsync(notification, true);
 
                 var allConnections = _hub.getAllConnectionsId();
@@ -77,7 +94,7 @@ namespace DawaaNeo.Notifications
                     {
                         foreach (var connectionId in connectionsId)
                         {
-                            await sendMessage(connectionId, content);
+                            await sendMessage(connectionId, patient.Name);
                         }
                     }
 
@@ -102,7 +119,17 @@ namespace DawaaNeo.Notifications
             var requiredData = new PagedResultDto<ProviderNotificationDto>
             {
                 TotalCount = count,
-                Items = mappingData
+                Items = notifications.Select(x => new ProviderNotificationDto
+                {
+                    Id = x.Id,
+                    IsRead = x.IsRead,
+                    EntityId = x.EntityId,
+                    Title = L[x.Title],
+                    CreatedOn = x.CreatedOn,
+                    CreationTime = x.CreationTime,
+                    Type = x.Type,
+                    Content = L[x.Content, x.GetProperty("patientName") ?? "" ]
+                }).ToList()
             };
 
             return requiredData;

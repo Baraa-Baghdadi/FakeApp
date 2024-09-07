@@ -7,12 +7,13 @@ using Volo.Abp.Application.Dtos;
 
 namespace DawaaNeo.Notifications
 {
-    public class ProviderNotificationDto : EntityDto<Guid>
+    public class ProviderNotificationDto : FullAuditedEntityDto<Guid>
     {
         public Guid? EntityId { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
-        public Guid? TenantId { get; set; } // For provider notification
+        public NotificationTypeEnum Type { get; set; }
+        public bool IsRead { get; set; }
         public decimal CreatedOn { get; set; } // time according user
     }
 }

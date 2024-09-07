@@ -32,7 +32,10 @@ public class DawaaNeoApplicationAutoMapperProfile : Profile , ISingletonDependen
         CreateMap<ProviderAddress, ProviderAddressDto>().ReverseMap();
         CreateMap<PatientProvider, PatientProviderDto>()
             .ForMember(dest => dest.MobileNumber, opt => opt.MapFrom(src => src.Patient != null ? src.Patient.MobileNumber : ""))
-            .ForMember(dest => dest.CountryCode, opt => opt.MapFrom(src => src.Patient != null ? src.Patient.CountryCode : ""));
+            .ForMember(dest => dest.CountryCode, opt => opt.MapFrom(src => src.Patient != null ? src.Patient.CountryCode : ""))
+            .ForMember(dest => dest.FullMobileNumber, opt => opt.MapFrom(src => src.Patient != null ? src.Patient.FullMobileNumber : ""))
+            .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Patient != null ? src.Patient.Name : ""))
+            .ForMember(dest => dest.Dob, opt => opt.MapFrom(src => src.Patient != null ? src.Patient.Dob : null));
 
 
         CreateMap<WorkingTime, WorkingTimeForMobileDto>();

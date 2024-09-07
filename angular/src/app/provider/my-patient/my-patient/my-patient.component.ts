@@ -27,7 +27,8 @@ export class MyPatientComponent {
 
   getAllMyPatient(){
     this.service.getAllPatientsOfProvider(this.patientFilter).subscribe({
-      next : (data:any) => {this.patients = data;}
+      next : (data:any) => {this.patients = data;console.log(data);
+      }
     });
 
   }

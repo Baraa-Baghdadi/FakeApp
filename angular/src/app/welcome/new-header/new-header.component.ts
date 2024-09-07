@@ -55,13 +55,14 @@ export class NewHeaderComponent implements OnInit {
   constructor(
     private config: ConfigStateService,
     private sessionState:SessionStateService,
-    private localizationService : LocalizationService,
+    public localizationService : LocalizationService,
     public notificationListener : NotificationListenerService) { 
       this.listenToLanguageChanges();
     }
     
     // For Select language:
    selectLang(lang:any){
+      this.notificationListener.makeNotificationListEmpty();
       this.sessionState.setLanguage(lang);
       this.selectedLang = this.sessionState.getLanguage();
       this.labelOfSelectedLang = this.selectedLang === "en" ? "English" : "العربية" ;

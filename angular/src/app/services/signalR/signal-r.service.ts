@@ -4,6 +4,7 @@ import * as signalR from '@microsoft/signalr';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { NotificationListenerService } from '../notification/notification-listener.service';
 import { ToastComponent, ToasterService } from '@abp/ng.theme.shared';
+import { LocalizationService } from '@abp/ng.core';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,8 @@ import { ToastComponent, ToasterService } from '@abp/ng.theme.shared';
 export class SignalRService {
 
   constructor(private NotificationListener : NotificationListenerService
-    , private toaster : ToasterService,private OAuthService: OAuthService
+    , private toaster : ToasterService,private OAuthService: OAuthService,
+    private localizationServie: LocalizationService
   ) { }
 
   // Connect To SignalR:
@@ -26,7 +28,7 @@ export class SignalRService {
       return console.error(err.toString());
     });
 
-    connection.on("PatientAddedYouMsg", () => {
+    connection.on("PatientAddedYouMsg", (data:any) => {
       // Send new event for update data in table:
       this.NotificationListener.reciveNewPatientListener.next(true);
       // update notification list:
@@ -36,7 +38,8 @@ export class SignalRService {
       // increase count of unread MSG:
       this.NotificationListener.increaseCount();
       // show toaster:
-      this.toaster.info("::newPatientAddedYou","",{life: 5000,closable:false});     
+      this.toaster.info(this.localizationServie.instant("::newPatientAddedYou",data.toString()),
+      "",{life: 5000,closable:false});     
     });
   }
 }

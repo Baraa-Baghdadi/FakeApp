@@ -43,9 +43,13 @@ export class NotificationListenerService {
           data.items = [...oldValue,...data.items];
           this.NotificationList.next(data);              
         }
-        else{
+        else{          
           this.NotificationList.next(data);         
         }       
     });
+  }
+
+  makeNotificationListEmpty(){
+    this.NotificationList.next(null); 
   }
 }

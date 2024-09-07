@@ -11,7 +11,10 @@ namespace DawaaNeo.Patients
         public Guid ProviderId { get; set; }
         public DateTime AddingDate { get; set; }
         public string? MobileNumber { get; set; }
+        public virtual string? FullMobileNumber { get; set; }
         public string? CountryCode { get; set; }
+        public string? Name { get; set; }
+        public DateTime? Dob { get; set; }
         public PatientAddingType AddingType { get; set; }
     }
 }

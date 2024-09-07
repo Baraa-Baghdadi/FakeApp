@@ -11,7 +11,7 @@ namespace DawaaNeo.Notifications
 {
     public interface INotificationProviderAppService : IApplicationService
     {
-        Task CreateAddedYouToMyPharmacytNotification(Guid id, string content, NotificationTypeEnum type);
+        Task CreateAddedYouToMyPharmacytNotification(Guid id, string content, NotificationTypeEnum type, Dictionary<string, string> extraproperties);
         Task<PagedResultDto<ProviderNotificationDto>> GetListOfProviderNotification(PagedAndSortedResultRequestDto input);
         Task MarkAllAsRead();
         Task<int> GetCountOfUnreadingMsgAsync();

@@ -55,6 +55,11 @@
             </div>
           </ng-template>
         </ngx-datatable-column>
+        <ngx-datatable-column
+        [maxWidth]="250"
+        [name]="'::Name' | abpLocalization"
+        prop="name">
+    </ngx-datatable-column>
         <ngx-datatable-column [maxWidth]="250" [name]="'::addingType' | abpLocalization" prop="addingType">
           <ng-template let-row="row" ngx-datatable-cell-template>
             {{ '::Enum:addingType:' + row.addingType | abpLocalization }}
@@ -62,19 +67,22 @@
         </ngx-datatable-column>
         <ngx-datatable-column
           [maxWidth]="250"
-          [name]="'::countryCode' | abpLocalization"
-          prop="countryCode"
+          [name]="'::fullMobileNumber' | abpLocalization"
+          prop="fullMobileNumber"
         >
         <ng-template let-row="row" ngx-datatable-cell-template>
-          <span style="direction: ltr !important;">{{row.countryCode}}</span>
+          <span style="direction: ltr !important;">{{row.fullMobileNumber}}</span>
         </ng-template>
       </ngx-datatable-column>
-        <ngx-datatable-column
-        class="ltr"
-          [name]="'::mobileNumber' | abpLocalization"
-          [maxWidth]="380"
-          prop="mobileNumber"
-        ></ngx-datatable-column>
+
+      <ngx-datatable-column
+      [maxWidth]="250"
+      [name]="'::dob' | abpLocalization"
+      prop="dob">
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        <span >{{row.dob | date :'MM/dd/yyyy'}}</span>
+      </ng-template>
+    </ngx-datatable-column>
       </ngx-datatable>
     </div>
   </div>

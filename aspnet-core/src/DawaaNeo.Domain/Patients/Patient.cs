@@ -17,18 +17,22 @@ namespace DawaaNeo.Patients
 
         [CanBeNull]
         public virtual string? FullMobileNumber { get; set; }
+        public string? Name { get; set; }
+        public DateTime? Dob { get; set; }
         public ApplicationLanguage CurrentLanguage { get; set; }
         public ICollection<PatientAddress>? PatientAddresses { get; set; }
         public ICollection<PatientProvider>? PatientProviders { get; set; }
 
         protected Patient() { }
 
-        public Patient(Guid id,string mobileNumber,string countryCode, string patientId)
+        public Patient(Guid id,string mobileNumber,string countryCode, string patientId,string name,DateTime dob)
         {
             Id = id;
             MobileNumber = mobileNumber;
             CountryCode = countryCode;
             PatientId = patientId;
+            Name = name;
+            Dob = dob;
             FullMobileNumber = CountryCode + MobileNumber;
             CurrentLanguage = ApplicationLanguage.en;
         }
