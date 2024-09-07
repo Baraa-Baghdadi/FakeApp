@@ -11,7 +11,8 @@ export class NotificationListenerService {
   unreadNotificationCount = new BehaviorSubject<number>(0);
   unreadNotificationCount$ = this.unreadNotificationCount.asObservable();
   unReadingNotificationList = new BehaviorSubject<{}>({});
-  NotificationList = new BehaviorSubject<{}>({});
+  NotificationList = new BehaviorSubject<any | null>(null);
+  NotificationList$ = this.NotificationList.asObservable();
   constructor(private notificationsService : NotificationProviderService) { }
 
   increaseCount(){
@@ -31,11 +32,20 @@ export class NotificationListenerService {
   }
 
   // Get List Of Msg:
-  getMsgList(){
+  getMsgList(page=1,itemsPerPage=10){
     var notificationFilter = {} as PagedAndSortedResultRequestDto;
+    notificationFilter.maxResultCount = itemsPerPage;
+    notificationFilter.skipCount = (page * itemsPerPage) - itemsPerPage;
     this.notificationsService.getListOfProviderNotificationByInput(notificationFilter)
-      .subscribe((data) => {
-        this.NotificationList.next(data);     
+      .subscribe((data:any) => {
+        if (this.NotificationList.value != null) {
+          var oldValue = this.NotificationList.value.items;
+          data.items = [...oldValue,...data.items];
+          this.NotificationList.next(data);              
+        }
+        else{
+          this.NotificationList.next(data);         
+        }       
     });
   }
 }

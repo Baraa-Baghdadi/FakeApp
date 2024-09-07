@@ -6,6 +6,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { WelcomeRoutingModule } from './welcome-routing.module';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { NewHeaderComponent } from './new-header/new-header.component';
+import { InfiniteScrollModule } from "ngx-infinite-scroll";
 
 
 
@@ -19,7 +20,8 @@ import { NewHeaderComponent } from './new-header/new-header.component';
     WelcomeRoutingModule,
     ThemeSharedModule,
     SharedModule,
-    NgbDropdownModule
+    NgbDropdownModule,
+    InfiniteScrollModule
   ]
 })
 export class WelcomeModule { }
