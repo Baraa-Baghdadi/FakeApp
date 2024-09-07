@@ -1,4 +1,4 @@
-import { getLocaleDirection, LocalizationService, SessionStateService } from '@abp/ng.core';
+import { AuthService, ConfigStateService, getLocaleDirection, LocalizationService, SessionStateService } from '@abp/ng.core';
 import { LocaleDirection } from '@abp/ng.theme.shared';
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, map } from 'rxjs';
@@ -19,13 +19,41 @@ export class NewHeaderComponent implements OnInit {
   dir$ = this.dir.asObservable();
 
   allMsgs : any;
+  // For pagination:
+  isLoading=false;
+  currentPage=1;
+  itemsPerPage=10;
+  toggleLoading = ()=>this.isLoading=!this.isLoading;
+
+    // it will be called when this component gets initialized.
+    loadData= ()=>{
+      this.toggleLoading();
+      this.getMsgList(this.currentPage,this.itemsPerPage);
+    }
+    
+    // this method will be called on scrolling the page
+    appendData= ()=>{
+     this.toggleLoading();
+     this.getMsgList(this.currentPage,this.itemsPerPage);
+   }
+ 
+    onScroll= ()=>{
+     this.currentPage++;     
+     this.appendData();
+    }
+ 
+
 
   ngOnInit(): void {
-    this.getUnreadedMsg();
-    this.getMsgList();
+    const tenantId = this.config.getOne("currentUser").tenantId;
+    if (tenantId) {  
+      this.getUnreadedMsg();
+      this.loadData();
+    }
   }
 
   constructor(
+    private config: ConfigStateService,
     private sessionState:SessionStateService,
     private localizationService : LocalizationService,
     public notificationListener : NotificationListenerService) { 
@@ -61,10 +89,7 @@ export class NewHeaderComponent implements OnInit {
       this.notificationListener.makeAllMsgAsReaded();
     }
 
-    getMsgList(){
-      this.notificationListener.getMsgList();
-      this.notificationListener.NotificationList.subscribe((data:any) => {
-        this.allMsgs = data.items;
-      })
+    getMsgList(page=1,itemsPerPage=10){
+      this.notificationListener.getMsgList(page,itemsPerPage);
     }
 }

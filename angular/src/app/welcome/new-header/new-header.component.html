@@ -1,7 +1,7 @@
 <div class="row">
   <!-- Bell -->
    <div ngbDropdown class="col-2 position-relative" (click)="makeAllMsgAsReaded()">
-    <div class="notification" data-toggle="dropdown" aria-haspopup="true" ngbDropdownToggle>
+    <div class="notificationIcon" data-toggle="dropdown" aria-haspopup="true" ngbDropdownToggle>
       <i class="fa fa-bell-o bell mt-1 cpointer" ></i>
       <span style="top:5px !important;font-size:10px;" 
         class="position-absolute start-100 translate-middle  badge rounded-pill bg-danger"
@@ -9,21 +9,21 @@
         {{count}}
       </span>
     </div>
-    <div ngbDropdownMenu class="list">
+    <div ngbDropdownMenu class="list"
+    class="search-results"
+    infiniteScroll
+    (scrolled)="onScroll()"
+    [scrollWindow]="false"
+    >
       <!-- Notifications List -->
-      <div ngbDropdownItem class="notifications-list">
-        <h5 *ngIf="(notificationListener.unreadNotificationCount$ | async) as count">{{"::Notofications" | abpLocalization}}</h5>
-        <div>
-          <div *ngFor="let item of allMsgs">
-            <div class="notification d-block">
-              <div class="overflow-example pt-3 cpointer">
-                <i class="fas fa-bell" style="color: #0baddd;font-size: 18px;"></i>
-                <span class="ms-1">{{"::"+item.content | abpLocalization}}</span>
-              </div>
+      <div class="notifications-list" *ngIf="(notificationListener.NotificationList$ | async) as List">
+            <div ngbDropdownItem class="notification" *ngFor="let item of List.items">
+                <img src="./../../../assets/images/logo/dawaa24-1627391353.svg" alt="Channel Image">
+                <div class="notification-content mt-2">
+                    <h6 class="txt">{{"::" + item.content | abpLocalization}}</h6>
+                    <!-- <p>1 hour ago</p> -->
+                </div>
             </div>
-          </div>
-          
-        </div>
       </div>
     </div>
    </div>
