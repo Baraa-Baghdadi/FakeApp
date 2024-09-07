@@ -13,7 +13,10 @@ export interface PatientProviderDto extends EntityDto<string> {
   providerId?: string;
   addingDate?: string;
   mobileNumber?: string;
+  fullMobileNumber?: string;
   countryCode?: string;
+  name?: string;
+  dob?: string;
   addingType: PatientAddingType;
 }
 

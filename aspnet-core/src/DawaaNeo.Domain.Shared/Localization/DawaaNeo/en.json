@@ -35,8 +35,11 @@
     "showImage": "Show Image",
     "orginalImage": "Orginal Image",
     "downloadImage": "Download Image",
-    "newPatientAddedYou": "A new patient has been added to your pharmacy",
+    "newPatientAddedYou": "{0} joined your pharmacy",
     "Notofications": "Notifications",
-    "noNotifications": "No Notifications"
+    "noNotifications": "No Notifications !!",
+    "fullMobileNumber": "Mobile Number",
+    "Name": "Name",
+    "dob": "Date Of Birthday"
   }
 }

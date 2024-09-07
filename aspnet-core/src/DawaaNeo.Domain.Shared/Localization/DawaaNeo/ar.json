@@ -33,8 +33,11 @@
     "showImage": "مشاهدة الصورة الأصلية",
     "orginalImage": "الصورة الأصلية",
     "downloadImage": "تحميل الصورة",
-    "newPatientAddedYou": "تمت إضافة صيدليتك من قبل مريض جديد",
+    "newPatientAddedYou": "انضم {0} إلى صيدليتك",
     "Notofications": "الإشعارات",
-    "noNotifications": "لا يوجد إشعارات"
+    "noNotifications": " !! لا يوجد إشعارات",
+    "fullMobileNumber": "رقم الموبايل",
+    "Name": "الاسم",
+    "dob": "تاريخ الميلاد"
   }
 }

@@ -94,7 +94,7 @@ namespace DawaaNeo.PatientAuth
                     customPatientId = _generateCustomPatientId();
                     patientIdIsExist = await _patientRepository.AnyAsync(p => p.PatientId == customPatientId);
                 }
-                await _patientManager.CreateAsync(input.MobileNumber, input.CountryCode, customPatientId);
+                await _patientManager.CreateAsync(input.MobileNumber, input.CountryCode, customPatientId,input.Name,input.Dob);
                 newUser = new IdentityUser(GuidGenerator.Create(),username,newEmail,null);
                 newUser.SetIsActive(true);
                 newUser.SetEmailConfirmed(true);

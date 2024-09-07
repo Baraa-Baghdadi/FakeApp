@@ -21,9 +21,9 @@ namespace DawaaNeo.Patients
             _patientRepository = patientRepository;
         }
 
-        public virtual async Task<Patient> CreateAsync(string mobileNumber,string countryCode,string patientId)
+        public virtual async Task<Patient> CreateAsync(string mobileNumber,string countryCode,string patientId,string name,DateTime dob)
         {
-            var patient = new Patient(GuidGenerator.Create(),mobileNumber,countryCode,patientId);
+            var patient = new Patient(GuidGenerator.Create(),mobileNumber,countryCode,patientId,name,dob);
             return await _patientRepository.InsertAsync(patient);
         }
 

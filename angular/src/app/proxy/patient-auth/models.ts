@@ -9,6 +9,8 @@ export interface PatientAuthDto {
   countryCode: string;
   mobileNumber: string;
   code: string;
+  name: string;
+  dob: string;
   deviceToken?: string;
 }
 
