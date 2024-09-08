@@ -13,8 +13,8 @@ using Volo.Abp.EntityFrameworkCore;
 namespace DawaaNeo.Migrations
 {
     [DbContext(typeof(DawaaNeoDbContext))]
-    [Migration("20240902180415_addImageIdInService")]
-    partial class addImageIdInService
+    [Migration("20240908184231_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -216,6 +216,9 @@ namespace DawaaNeo.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("LastModifierId");
 
+                    b.Property<Guid?>("TenantId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -223,7 +226,7 @@ namespace DawaaNeo.Migrations
                     b.Property<int>("Type")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid?>("UserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -471,6 +474,9 @@ namespace DawaaNeo.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("DeletionTime");
 
+                    b.Property<DateTime?>("Dob")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("ExtraProperties")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
@@ -494,6 +500,9 @@ namespace DawaaNeo.Migrations
                         .HasColumnName("LastModifierId");
 
                     b.Property<string>("MobileNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PatientId")
