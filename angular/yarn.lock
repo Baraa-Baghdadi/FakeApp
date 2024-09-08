@@ -6374,6 +6374,13 @@ ngx-material-timepicker@^13.1.1:
   dependencies:
     tslib "^2.0.0"
 
+ngx-spinner@^17.0.0:
+  version "17.0.0"
+  resolved "https://registry.yarnpkg.com/ngx-spinner/-/ngx-spinner-17.0.0.tgz#b3e1d54bb4c4e3cf6f949ef8dd1927dfa1e9058d"
+  integrity sha512-VWDSvLlCnaWqu0W1L+ybQIRHTbd+GffkX1sWs++iMPXMGVJ2ZCuzW32FHnu+p0regMUHU8r1/rvUcFD0YooJxQ==
+  dependencies:
+    tslib "^2.3.0"
+
 nice-napi@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/nice-napi/-/nice-napi-1.0.2.tgz#dc0ab5a1eac20ce548802fc5686eaa6bc654927b"
