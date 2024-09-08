@@ -4,23 +4,27 @@ import * as signalR from '@microsoft/signalr';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { NotificationListenerService } from '../notification/notification-listener.service';
 import { ToastComponent, ToasterService } from '@abp/ng.theme.shared';
-import { LocalizationService } from '@abp/ng.core';
+import { EnvironmentService, LocalizationService } from '@abp/ng.core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SignalRService {
+  backendApi : string = "";
 
   constructor(private NotificationListener : NotificationListenerService
     , private toaster : ToasterService,private OAuthService: OAuthService,
-    private localizationServie: LocalizationService
-  ) { }
+    private localizationServie: LocalizationService,
+    private environmentService : EnvironmentService
+  ) { 
+    this.getBackendUrl();
+  }
 
   // Connect To SignalR:
   connect(){
     const connection = new signalR.HubConnectionBuilder()
     .configureLogging(signalR.LogLevel.Information)
-    .withUrl(environment.apis.default.url + '/notify',{accessTokenFactory  :  () => this.OAuthService.getAccessToken()})
+    .withUrl(this.backendApi + '/notify',{accessTokenFactory  :  () => this.OAuthService.getAccessToken()})
     .build();
     connection.start().then(function () {
       console.log('SignalR Connected! & connectionId:',connection.connectionId);
@@ -42,4 +46,11 @@ export class SignalRService {
       "",{life: 5000,closable:false});     
     });
   }
+
+  getBackendUrl(){
+    this.environmentService.getEnvironment$().subscribe((environment) => {
+      this.backendApi = environment.apis.default.url;
+    });
+  }
+  
 }
