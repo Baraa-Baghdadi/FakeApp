@@ -110,7 +110,8 @@
                 "inject": true,
                 "bundleName": "ngx-datatable-material"
               },
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/ngx-spinner/animations/ball-scale.css"
             ],
             "scripts": [
             ]
