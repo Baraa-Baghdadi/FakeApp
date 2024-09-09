@@ -164,7 +164,7 @@ namespace DawaaNeo.Patients.Mobile
             await _patientProviderRepository.InsertAsync(patientProvider,true);
 
             // Send Notification For Provider:
-            await _notificationProviderAppService.CreateAddedYouToMyPharmacytNotification(patientProvider.Id, 
+            await _notificationProviderAppService.CreateAddedYouToMyPharmacytNotification(patientProvider.PatientId ?? Guid.Empty, 
                 "newPatientAddedYou",NotificationTypeEnum.NewPatient,
                 new Dictionary<string, string> { { "patientName", patient.Name } });
             return _apiResponse.Success(true);

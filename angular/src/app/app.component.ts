@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { SignalRService } from './services/signalR/signal-r.service';
 import { eThemeLeptonXComponents } from '@abp/ng.theme.lepton-x';
 import { NewHeaderComponent } from './welcome/new-header/new-header.component';
+import { NavItemsService } from '@abp/ng.theme.shared';
 
 
 @Component({
@@ -17,6 +18,7 @@ export class AppComponent implements OnInit {
 
   constructor(private authService:AuthService,private signalR:SignalRService,
     private replaceableComponent: ReplaceableComponentsService,
+    private _navItem : NavItemsService
   ){
   }
 
@@ -28,5 +30,14 @@ export class AppComponent implements OnInit {
       component: NewHeaderComponent,
       key: eThemeLeptonXComponents.Languages,
     });
+
+    // this._navItem.addItems([
+    //   {
+    //     id: 'MySearchInput',
+    //     order: 3,
+    //     component: NewHeaderComponent,
+    //   },
+    // ]     
+    // )
   }
 }
