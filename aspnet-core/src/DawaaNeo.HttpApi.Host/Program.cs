@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
+using DawaaNeo.StartupTasks;
 using FirebaseAdmin;
 using Google.Apis.Auth.OAuth2;
 using Microsoft.AspNetCore.Builder;
@@ -47,6 +48,15 @@ public class Program
 
             var app = builder.Build();
             await app.InitializeApplicationAsync();
+
+            // For auto migration and seeder:
+            var startupTasks = app.Services.GetServices<IStartupTask>();
+            //run the startup:
+            foreach (var item in startupTasks)
+            {
+                await item.Excute(app);
+            }
+
             await app.RunAsync();
             return 0;
         }

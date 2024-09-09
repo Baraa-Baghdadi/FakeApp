@@ -30,6 +30,9 @@ using Volo.Abp.Swashbuckle;
 using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.VirtualFileSystem;
 using DawaaNeo.Hub;
+using System.Drawing.Text;
+using DawaaNeo.StartupTasks;
+using Volo.Abp.PermissionManagement;
 
 namespace DawaaNeo;
 
@@ -71,6 +74,12 @@ public class DawaaNeoHttpApiHostModule : AbpModule
         ConfigureVirtualFileSystem(context);
         ConfigureCors(context, configuration);
         ConfigureSwaggerServices(context, configuration);
+        // For auto migration and seeder:
+        ConfigureStartupTasks(context);
+        Configure<PermissionManagementOptions>(options =>
+        {
+            options.IsDynamicPermissionStoreEnabled = true;
+        });
         // add signalR:
         context.Services.AddSignalR();
     }
@@ -251,4 +260,12 @@ public class DawaaNeoHttpApiHostModule : AbpModule
         app.UseAbpSerilogEnrichers();
         app.UseConfiguredEndpoints();
     }
+
+    // For auto migration and seeder:
+    private void ConfigureStartupTasks(ServiceConfigurationContext context)
+    {
+        context.Services.AddTransient<IStartupTask, CreateDatabaseStartupTask>();
+    }
+
+
 }
