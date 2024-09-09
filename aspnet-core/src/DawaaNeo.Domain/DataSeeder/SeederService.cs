@@ -24,7 +24,7 @@ namespace DawaaNeo.DataSeeder
         public virtual async Task SeedAsync ()
         {
             await _migrationService.MigrateAsync();
-            //await _seedContributer.Seed();
+            // await _seedContributer.Seed();
         }
     }
 }

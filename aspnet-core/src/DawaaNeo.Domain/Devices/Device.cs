@@ -11,5 +11,17 @@ namespace DawaaNeo.Devices
     {
         public string DeviceToken { get; set; } = string.Empty;
         public Guid UserId { get; set; }
+
+        public Device(Guid id,Guid userId,string deviceToken)
+        {
+            Id = id;
+            UserId = userId;
+            DeviceToken = deviceToken;
+        }
+
+        public Device()
+        {
+            
+        }
     }
 }
