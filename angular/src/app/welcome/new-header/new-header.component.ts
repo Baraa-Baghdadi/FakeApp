@@ -1,6 +1,6 @@
 import { AuthService, ConfigStateService, getLocaleDirection, LocalizationService, SessionStateService } from '@abp/ng.core';
 import { LocaleDirection } from '@abp/ng.theme.shared';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { BehaviorSubject, map } from 'rxjs';
 import { NotificationListenerService } from 'src/app/services/notification/notification-listener.service';
 
@@ -14,9 +14,11 @@ export class NewHeaderComponent implements OnInit {
   selectedLang = this.sessionState.getLanguage();
   labelOfSelectedLang = this.selectedLang === "en" ? "English" : "العربية" ;
   showLangList = false;
+  isShowListOfNotification = false;
 
   private dir = new BehaviorSubject<LocaleDirection>('ltr');
   dir$ = this.dir.asObservable();
+
 
   allMsgs : any;
   // For pagination:
@@ -41,6 +43,11 @@ export class NewHeaderComponent implements OnInit {
      this.currentPage++;     
      this.appendData();
     }
+
+    showMsgList(){
+      this.isShowListOfNotification = true;
+      this.makeAllMsgAsReaded();
+    }
  
 
 
@@ -56,7 +63,8 @@ export class NewHeaderComponent implements OnInit {
     private config: ConfigStateService,
     private sessionState:SessionStateService,
     public localizationService : LocalizationService,
-    public notificationListener : NotificationListenerService) { 
+    public notificationListener : NotificationListenerService,
+    private elementRef: ElementRef) { 
       this.listenToLanguageChanges();
     }
     
@@ -92,5 +100,19 @@ export class NewHeaderComponent implements OnInit {
 
     getMsgList(page=1,itemsPerPage=10){
       this.notificationListener.getMsgList(page,itemsPerPage);
+    }
+
+
+
+    // Close PopUp:
+    @HostListener('document:click', ['$event.target'])
+    public onClick(targetElement: HTMLElement) {
+      const tenantId = this.config.getOne("currentUser").tenantId;
+      if (tenantId) {
+        const clickedInside = this.elementRef.nativeElement.contains(targetElement);
+        if (!clickedInside) {
+          this.isShowListOfNotification = false;
+        }
+      }
     }
 }

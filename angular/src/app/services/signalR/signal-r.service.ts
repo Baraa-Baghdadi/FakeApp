@@ -34,6 +34,7 @@ export class SignalRService {
 
     connection.on("PatientAddedYouMsg", (data:any) => {
       // Send new event for update data in table:
+      this.NotificationListener.makeNotificationListEmpty();
       this.NotificationListener.reciveNewPatientListener.next(true);
       // update notification list:
       setTimeout(() => {

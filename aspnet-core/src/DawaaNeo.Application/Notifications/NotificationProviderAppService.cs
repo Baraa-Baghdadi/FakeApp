@@ -46,10 +46,10 @@ namespace DawaaNeo.Notifications
         public async Task CreateAddedYouToMyPharmacytNotification(Guid id, string content, NotificationTypeEnum type, Dictionary<string, string> extraproperties)
         {
             // Get patientProvider:
-            var patientProvider = await _patientProviderRepo.FirstOrDefaultAsync(row => row.Id == id)
+            var patientProvider = await _patientProviderRepo.FirstOrDefaultAsync(row => row.PatientId == id)
                 ?? throw new UserFriendlyException(L[DawaaNeoDomainErrorCodes.GeneralErrorCode.NotFound]);
 
-            var patient = await _patientRepo.FirstOrDefaultAsync(row => row.Id == patientProvider.PatientId);
+            var patient = await _patientRepo.FirstOrDefaultAsync(row => row.Id == id);
 
             using (_dataFilter.Disable<IMultiTenant>())
             {
@@ -69,7 +69,7 @@ namespace DawaaNeo.Notifications
                     IsRead = false,
                     Type = type,
                     TenantId = provider.TenantId,
-                    CreatedOn = ServiceHelper.getTimeSpam(DateTime.UtcNow)
+                    CreatedOn = ServiceHelper.getTimeSpam(DateTime.UtcNow).Value
                 };
 
                 // save json in extraProperty Column in DB:
