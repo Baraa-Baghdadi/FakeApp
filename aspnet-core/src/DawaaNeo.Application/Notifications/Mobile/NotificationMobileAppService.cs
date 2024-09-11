@@ -83,7 +83,7 @@ namespace DawaaNeo.Notifications.Mobile
                 IsRead = false,
                 Type = type,
                 UserId = user!.Id,
-                CreatedOn = ServiceHelper.getTimeSpam(DateTime.UtcNow)
+                CreatedOn = ServiceHelper.getTimeSpam(DateTime.UtcNow).Value
             };
 
             // save json in extraProperty Column in DB:

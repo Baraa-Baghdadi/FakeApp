@@ -49,22 +49,14 @@ namespace DawaaNeo
       return (angel * Math.PI) / 180;
     }
 
-    public static decimal getTimeSpam(DateTime dt)
+    public static long? getTimeSpam(DateTime? dt)
     {
-            // Define the epoch (in this case, the .NET epoch: January 1, 0001)
-            DateTime epoch = new DateTime(1, 1, 1);
-
-            // Calculate the total days since the epoch
-            int daysSinceEpoch = (dt.Date - epoch).Days;
-
-            // Calculate the fractional part of the day
-            double fractionalDay = (dt.Hour + (dt.Minute / 60.0) + (dt.Second / 3600.0) + (dt.Millisecond / 3600000.0)) / 24.0;
-
-            // Combine the integer and fractional parts into a decimal
-            decimal decimalRepresentation = (decimal)daysSinceEpoch + (decimal)fractionalDay;
-
-            return decimalRepresentation;
-        }
+            if (dt.HasValue)
+            {
+                return ((DateTimeOffset)dt).ToUnixTimeSeconds();
+            }
+            return null;
+    }
 
     public static string GetThumbNail(string iconBase64)
         {

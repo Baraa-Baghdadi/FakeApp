@@ -1,7 +1,7 @@
 <div class="row">
   <!-- Bell -->
-   <div ngbDropdown class="col-2 position-relative" (click)="makeAllMsgAsReaded()">
-    <div class="notificationIcon" data-toggle="dropdown" aria-haspopup="true" ngbDropdownToggle>
+   <div *abpPermission="'DawaaNeo.Dashboard.Tenant'" class="col-2 position-relative" (click)="showMsgList()">
+    <div class="notificationIcon">
       <i class="fa fa-bell-o bell mt-1 cpointer" ></i>
       <span style="top:5px !important;font-size:10px;" 
         class="position-absolute start-100 translate-middle  badge rounded-pill bg-danger"
@@ -10,24 +10,23 @@
       </span>
     </div>
     <!-- Scroll Pagination -->
-    <div ngbDropdownMenu class="list"
-    class="search-results"
-    infiniteScroll
-    (scrolled)="onScroll()"
-    [scrollWindow]="false"
-    >
+    <div *ngIf="isShowListOfNotification" class="list">
       <!-- Notifications List -->
       <div class="notifications-list" *ngIf="(notificationListener.NotificationList$ | async) as List">
         <h5 class="text-center text-danger" *ngIf="List.totalCount === 0">{{"::noNotifications" | abpLocalization}}</h5>    
-        <div ngbDropdownItem class="notification" *ngFor="let item of List.items">
-          <ng-container>
-            <img src="assets/images/logo/dawaa24-1627391353.svg" alt="Channel Image">
-            <div class="notification-content mt-2 ms-1">
-                <h6 class="txt">{{"::" + item.content | abpLocalization}}</h6>
-                <p>{{item.creationTime | date: 'MM/dd/yyyy hh:mm:ss a' }}</p>
-            </div>
-          </ng-container>
-            </div>
+        <h4 class="text-center text-dark p-2 border-bottom" *ngIf="List.totalCount !== 0">{{"::Notofications" | abpLocalization}}</h4>    
+        <div class="messages"     
+        infiniteScroll
+        (scrolled)="onScroll()"
+        [scrollWindow]="false">
+          <div class="row border-bottom p-2 align-items-start notification" *ngFor="let item of List.items">
+              <img class="col-3 mt-1" src="assets/images/logo/dawaa24-1627391353.svg" alt="Channel Image">
+              <div class="notification-content col-6">
+                  <h6>{{"::" + item.content | abpLocalization}}</h6>
+              </div>
+              <p class="col-3">{{item.creationTime | date: 'MM/dd/yyyy hh:mm:ss a' }}</p>
+          </div>
+        </div>
       </div>
     </div>
    </div>

@@ -53,7 +53,7 @@ namespace DawaaNeo.Orders
 
       // Create New Order:
       var order = new Order(GuidGenerator.Create(),provider!.Id, input.PatientId, orderId, input.HasInsurance, Total, input.Currency,
-        input.Decimals, input.OrderType, input.PaymentMethodTypes, ServiceHelper.getTimeSpam(DateTime.UtcNow), input.DeliveryDate,
+        input.Decimals, input.OrderType, input.PaymentMethodTypes, ServiceHelper.getTimeSpam(DateTime.UtcNow).Value, input.DeliveryDate,
         deliveryCost, input.AddressId, input.Note, input.Instruction, items);
 
       if (input.OrderType == OrderType.Delivery)
