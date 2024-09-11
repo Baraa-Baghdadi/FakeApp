@@ -1,12 +1,16 @@
 ﻿using DawaaNeo.Attachments;
 using DawaaNeo.Patients;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp;
 using Volo.Abp.Application.Dtos;
+using Volo.Abp.BlobStoring;
+using Volo.Abp.Content;
 using Volo.Abp.Domain.Repositories;
 
 namespace DawaaNeo.Services
@@ -15,11 +19,16 @@ namespace DawaaNeo.Services
     {
         private readonly IServiceRepository _serviceRepository;
         private readonly IAttachmentAppService _attachmentAppService;
+        private readonly IRepository<Attachment,Guid> _attachmentRepository;
+        private readonly IBlobContainer _blobContainer;
 
-        public ServiceAppService(IServiceRepository serviceRepository, IAttachmentAppService attachmentAppService)
+        public ServiceAppService(IServiceRepository serviceRepository, IAttachmentAppService attachmentAppService,
+            IRepository<Attachment,Guid> attachmentRepository, IBlobContainer blobContainer)
         {
             _serviceRepository = serviceRepository;
             _attachmentAppService = attachmentAppService;
+            _attachmentRepository = attachmentRepository;
+            _blobContainer = blobContainer;
         }
 
         public async Task<PagedResultDto<ServiceDto>> GetListAync(GetServieInput input)
@@ -32,7 +41,9 @@ namespace DawaaNeo.Services
 
             foreach (var item in mappingData)
             {
-                var imageId = items.FirstOrDefault(row => row.Id == item.Id).ImageId;
+
+                var service = items.FirstOrDefault(row => row.Id == item.Id);
+                var imageId = service!.ImageId;
                 item.OrginalImage = Convert.ToBase64String(await _attachmentAppService.GetImage(imageId));
             }
 
@@ -78,6 +89,7 @@ namespace DawaaNeo.Services
             var result = await _serviceRepository.InsertAsync(service, true);
             var mappingData =  ObjectMapper.Map<Service,ServiceDto>(result);
 
+            // For show image as it in FE:
             mappingData.OrginalImage = Convert.ToBase64String(await _attachmentAppService.GetImage(result.ImageId));
 
             return mappingData;
@@ -106,13 +118,33 @@ namespace DawaaNeo.Services
                 };
                 await _attachmentAppService.DeleteImage(dbSerice.ImageId);
                 var orginalImage = await _attachmentAppService.CreateAttachmentAsync(newImage);
-                dbSerice.ImageId = orginalImage.Id;
+
             }
 
             var result = await _serviceRepository.UpdateAsync(dbSerice, true);
             return ObjectMapper.Map<Service, ServiceDto>(result);
         }
 
+        public async Task<IRemoteStreamContent> DownloadFileAsync(string attachmentId)
+        {
+            try
+            {
+                Guid attachmentGuid = new Guid(attachmentId);
+                var docObg = await _attachmentRepository.GetAsync(attachmentGuid);
+                if (docObg != null)
+                {
+                    var stream = await _blobContainer.GetAsync(docObg.BlopName);
+                    return new RemoteStreamContent(stream,docObg.FileName);
+                }
+
+                throw new UserFriendlyException(DawaaNeoDomainErrorCodes.GeneralErrorCode.AttachmentNotExist);
+            }
+            catch(Exception ex) {
+
+                throw new UserFriendlyException(DawaaNeoDomainErrorCodes.GeneralErrorCode.AttachmentFailedDonload);
+
+            }
+        }
 
     }
 }

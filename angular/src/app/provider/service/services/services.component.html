@@ -57,7 +57,7 @@
                 <button ngbDropdownItem (click)="openImage(row.orginalImage)">
                   {{ '::showImage' | abpLocalization }}
                 </button>
-                <button ngbDropdownItem (click)="downloadImage()">
+                <button ngbDropdownItem (click)="downloadImage(row.imageId)">
                   {{ '::downloadImage' | abpLocalization }}
                 </button>
               </div>

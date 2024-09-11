@@ -38,6 +38,9 @@
     "noNotifications": " !! لا يوجد إشعارات",
     "fullMobileNumber": "رقم الموبايل",
     "Name": "الاسم",
-    "dob": "تاريخ الميلاد"
+    "dob": "تاريخ الميلاد",
+    "AttachmentNotExist": "الملف غير موجود",
+    "FailedDownload" :  "فشل التحميل"
+
   }
 }

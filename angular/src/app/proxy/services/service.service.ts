@@ -19,6 +19,15 @@ export class ServiceService {
     { apiName: this.apiName,...config });
   
 
+  downloadFile = (attachmentId: string, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, Blob>({
+      method: 'POST',
+      responseType: 'blob',
+      url: `/api/app/service/download-file/${attachmentId}`,
+    },
+    { apiName: this.apiName,...config });
+  
+
   getListAyncByInput = (input: GetServieInput, config?: Partial<Rest.Config>) =>
     this.restService.request<any, PagedResultDto<ServiceDto>>({
       method: 'GET',

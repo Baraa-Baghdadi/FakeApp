@@ -19,6 +19,7 @@ export interface ServiceDto extends EntityDto<string> {
   id?: string;
   title?: string;
   arTitle?: string;
+  imageId?: string;
   icon?: string;
   isActive: boolean;
   orginalImage?: string;
