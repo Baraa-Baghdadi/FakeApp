@@ -7,5 +7,7 @@ public static class DawaaNeoDomainErrorCodes
     public static class GeneralErrorCode
     {
         public const string NotFound = "NotFound";
+        public const string AttachmentNotExist = "AttachmentNotExist";
+        public const string AttachmentFailedDonload = "FailedDownload";
     }
 }

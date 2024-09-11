@@ -3513,6 +3513,23 @@
                     "type": "DawaaNeo.Services.ServiceDto",
                     "typeSimple": "DawaaNeo.Services.ServiceDto"
                   }
+                },
+                {
+                  "name": "DownloadFileAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "attachmentId",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "Volo.Abp.Content.IRemoteStreamContent",
+                    "typeSimple": "Volo.Abp.Content.IRemoteStreamContent"
+                  }
                 }
               ]
             }
@@ -3718,6 +3735,43 @@
               "returnValue": {
                 "type": "DawaaNeo.Services.ServiceDto",
                 "typeSimple": "DawaaNeo.Services.ServiceDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "DawaaNeo.Services.IServiceAppService"
+            },
+            "DownloadFileAsyncByAttachmentId": {
+              "uniqueName": "DownloadFileAsyncByAttachmentId",
+              "name": "DownloadFileAsync",
+              "httpMethod": "POST",
+              "url": "api/app/service/download-file/{attachmentId}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "attachmentId",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "attachmentId",
+                  "name": "attachmentId",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Content.IRemoteStreamContent",
+                "typeSimple": "Volo.Abp.Content.IRemoteStreamContent"
               },
               "allowAnonymous": null,
               "implementFrom": "DawaaNeo.Services.IServiceAppService"
@@ -8850,8 +8904,8 @@
         {
           "name": "Id",
           "jsonName": null,
-          "type": "System.Guid",
-          "typeSimple": "string",
+          "type": "System.Guid?",
+          "typeSimple": "string?",
           "isRequired": false,
           "minLength": null,
           "maxLength": null,
@@ -8876,6 +8930,18 @@
           "jsonName": null,
           "type": "System.String",
           "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "ImageId",
+          "jsonName": null,
+          "type": "System.Guid?",
+          "typeSimple": "string?",
           "isRequired": false,
           "minLength": null,
           "maxLength": null,

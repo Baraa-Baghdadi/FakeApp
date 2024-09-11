@@ -40,6 +40,8 @@
     "noNotifications": "No Notifications !!",
     "fullMobileNumber": "Mobile Number",
     "Name": "Name",
-    "dob": "Date Of Birthday"
+    "dob": "Date Of Birthday",
+    "AttachmentNotExist": "Attachment Not Exist",
+    "FailedDownload": "Failed Download"
   }
 }
