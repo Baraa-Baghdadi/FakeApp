@@ -10,10 +10,10 @@ namespace DawaaNeo.Notifications
     public class ProviderNotificationDto : FullAuditedEntityDto<Guid>
     {
         public Guid? EntityId { get; set; }
-        public string Title { get; set; }
-        public string Content { get; set; }
+        public string? Title { get; set; }
+        public string? Content { get; set; }
         public NotificationTypeEnum Type { get; set; }
-        public bool IsRead { get; set; }
-        public decimal CreatedOn { get; set; } // time according user
+        public bool? IsRead { get; set; }
+        public string? CreatedOn { get; set; } // time according user
     }
 }

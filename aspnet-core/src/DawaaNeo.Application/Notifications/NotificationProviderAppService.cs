@@ -125,7 +125,7 @@ namespace DawaaNeo.Notifications
                     IsRead = x.IsRead,
                     EntityId = x.EntityId,
                     Title = L[x.Title],
-                    CreatedOn = x.CreatedOn,
+                    CreatedOn = GetRelativeDate(UnixTimeStampToDateTime((double)x.CreatedOn)),
                     CreationTime = x.CreationTime,
                     Type = x.Type,
                     Content = L[x.Content, x.GetProperty("patientName") ?? "" ]
@@ -159,6 +159,45 @@ namespace DawaaNeo.Notifications
         private async Task sendMessage(string connectionId,string msg)
         {
             await _hubContext.Clients.Client(connectionId).PatientAddedYouMsg(msg);
+        }
+
+        private string GetRelativeDate(DateTime date)
+        {
+            TimeSpan ts = new TimeSpan(DateTime.Now.Ticks - date.Ticks);
+            double delta = Math.Abs(ts.TotalSeconds);
+            switch (delta)
+            {
+                case < 60:
+                    return L["justNow"];
+                case < 120:
+                    return L["oneMinuteAgo"];
+                case < 3600:
+                    return L["minutesAgo",ts.Minutes];
+                case < 7200:
+                    return L["oneHourAgo"];
+                case < 86400:
+                    return L["hoursAgo",ts.Hours];
+                default:
+                    if (date.Date == DateTime.Now.Date)
+                    {
+                        return L["today"];
+                    }
+                    else if (date.Date == DateTime.Now.AddDays(-1).Date)
+                    {
+                        return L["yesterday"];
+                    }
+                    else
+                    {
+                        return date.ToString("yyyy/MM/dd");
+                    }
+            }
+        }
+
+        private static DateTime UnixTimeStampToDateTime(double unixTimeStamp)
+        {
+            DateTime dateTime = new DateTime(1970,1,1,0,0,0,0,DateTimeKind.Utc);
+            dateTime = dateTime.AddSeconds(unixTimeStamp).ToLocalTime();
+            return dateTime;
         }
 
         #endregion

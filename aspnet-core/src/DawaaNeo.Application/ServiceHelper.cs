@@ -1,5 +1,6 @@
 using DawaaNeo.Orders;
 using IdentityModel.Client;
+using JetBrains.Annotations;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 namespace DawaaNeo
 {
   public static class ServiceHelper
-  {
+    {
     public static decimal _calculateDeliveryCost(Guid addressId, decimal total)
     {
       return 10;
@@ -57,6 +58,7 @@ namespace DawaaNeo
             }
             return null;
     }
+
 
     public static string GetThumbNail(string iconBase64)
         {

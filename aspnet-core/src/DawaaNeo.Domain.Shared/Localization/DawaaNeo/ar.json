@@ -40,7 +40,14 @@
     "Name": "الاسم",
     "dob": "تاريخ الميلاد",
     "AttachmentNotExist": "الملف غير موجود",
-    "FailedDownload" :  "فشل التحميل"
+    "FailedDownload": "فشل التحميل",
+    "justNow": "الأن",
+    "oneMinuteAgo": "منذ دقيقة",
+    "minutesAgo": "منذ {0} دقائق",
+    "oneHourAgo": "منذ ساعة",
+    "hoursAgo": "منذ {0} ساعات",
+    "today": "اليوم",
+    "yesterday": "البارحة"
 
   }
 }
