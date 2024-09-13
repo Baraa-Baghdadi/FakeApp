@@ -152,10 +152,12 @@ namespace DawaaNeo.Patients.Mobile
             var items = ObjectMapper.Map<List<PatientProvider>, List<PatientProviderDto>>(listOfUserPharmacies);
             foreach (var item in items)
             {
-                if (item.Id == input.ProviderId)
+                if (item.ProviderId == input.ProviderId)
                 {
                     var oldPharmacy = listOfUserPharmacies.Find(ph => ph.ProviderId == input.ProviderId);
-                    oldPharmacy.AddingDate = DateTime.Now;
+                    oldPharmacy!.AddingDate = DateTime.Now;
+                    // Send Notification For Provider:
+                    await SendNotificationForProvider(patient.Id, patient.Name);
                     return _apiResponse.Success(true);
                 }
             }
@@ -164,9 +166,7 @@ namespace DawaaNeo.Patients.Mobile
             await _patientProviderRepository.InsertAsync(patientProvider,true);
 
             // Send Notification For Provider:
-            await _notificationProviderAppService.CreateAddedYouToMyPharmacytNotification(patientProvider.PatientId ?? Guid.Empty, 
-                "newPatientAddedYou",NotificationTypeEnum.NewPatient,
-                new Dictionary<string, string> { { "patientName", patient.Name } });
+            await SendNotificationForProvider(patientProvider.PatientId ?? Guid.Empty, patient.Name);
             return _apiResponse.Success(true);
         }
 
@@ -194,6 +194,17 @@ namespace DawaaNeo.Patients.Mobile
             if (provider == null) throw new UserFriendlyException("Not Found");
             var providerDto = ObjectMapper.Map<PatientProvider, PharmacyInfoDto>(provider);
             return _apiResponse.Success<PharmacyInfoDto>(providerDto);
+        }
+
+        #endregion
+
+        #region methods
+
+        private async Task SendNotificationForProvider(Guid patientId,string patientName)
+        {
+            await _notificationProviderAppService.CreateAddedYouToMyPharmacytNotification(patientId,
+                "newPatientAddedYou", NotificationTypeEnum.NewPatient,
+                new Dictionary<string, string> { { "patientName", patientName } });
         }
 
         #endregion

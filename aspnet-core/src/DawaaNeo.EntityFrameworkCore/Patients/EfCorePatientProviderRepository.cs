@@ -98,9 +98,8 @@ namespace DawaaNeo.Patients
         {
             using (_dataFilter.Disable<IMultiTenant>())
             {
-                var query = (await GetQueryableAsync()).Include(p => p.Patient).Include(p => p.Provider)
-                    .ThenInclude(p => p.WorkingTimes)
-                    .Where(p => p.Patient.CountryCode + p.Patient.MobileNumber == userPhoneNumber).AsQueryable();
+                var query = (await GetQueryableAsync()).IgnoreQueryFilters();
+                query = query.Where(p => p.Patient!.FullMobileNumber == userPhoneNumber);
                 query = ApplyFilterForMobile(query, filterText, pharmacyName, pharmacyPhone);
                 query = query.OrderBy(string.IsNullOrWhiteSpace(sorting) ? PatientProviderConst.GetDefaultSorting(false) : sorting);
                 return await query.PageBy(skipCount,maxResultCount).ToListAsync(cancellationToken);

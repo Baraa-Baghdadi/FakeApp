@@ -24,15 +24,17 @@
 }
 // End Main Style........
 .list{
-  width: 450px;
-  max-width: 450px !important;
-  height: 516px !important;
+  width: 400px;
+  max-width: 400px !important;
   max-height: 516px !important;
   position: absolute;
   overflow-y: scroll;
   overflow-x: hidden;
   top: 36px;
   right: 0;
+}
+.innerBell{
+  color: #0087a1;
 }
 
 .notification:hover{
@@ -43,6 +45,10 @@
 
 .notification:last-child {
   border-bottom: none;
+}
+
+.messages{
+  margin-top: -10px;
 }
 
 // Scroll Design:
