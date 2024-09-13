@@ -181,12 +181,13 @@ export class ServicesComponent implements OnInit,AfterViewInit {
     this.orginalImage = image;
   }
 
-  downloadImage(iamgeId){
+  downloadImage(iamgeId,fileType = "jpeg"){
     this.service.downloadFile(iamgeId).subscribe(res => {
-      const blob = new Blob([res],{type:"application/jpeg"});
+      console.log(fileType);     
+      const blob = new Blob([res],{type:`application/${fileType}`});
       const link = document.createElement('a');
       link.href = window.URL.createObjectURL(blob);
-      link.download = "image.jpeg";
+      link.download = `service.${fileType}`;
       link.click();
     })
   }

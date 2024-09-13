@@ -23,4 +23,5 @@ export interface ServiceDto extends EntityDto<string> {
   icon?: string;
   isActive: boolean;
   orginalImage?: string;
+  fileType?: string;
 }

@@ -45,6 +45,7 @@ namespace DawaaNeo.Services
                 var service = items.FirstOrDefault(row => row.Id == item.Id);
                 var imageId = service!.ImageId;
                 item.OrginalImage = Convert.ToBase64String(await _attachmentAppService.GetImage(imageId));
+                item.FileType = (await _attachmentRepository.FirstOrDefaultAsync(row =>  row.Id == imageId))!.FileType;
             }
 
             return new PagedResultDto<ServiceDto>
