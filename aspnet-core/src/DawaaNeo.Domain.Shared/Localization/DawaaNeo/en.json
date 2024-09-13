@@ -42,6 +42,13 @@
     "Name": "Name",
     "dob": "Date Of Birthday",
     "AttachmentNotExist": "Attachment Not Exist",
-    "FailedDownload": "Failed Download"
+    "FailedDownload": "Failed Download",
+    "justNow": "Just Now",
+    "oneMinuteAgo": "Minute ago",
+    "minutesAgo": "{0} Minute",
+    "oneHourAgo": "Hour ago",
+    "hoursAgo": "{0} Hours",
+    "today": "Today",
+    "yesterday": "Yesterday"
   }
 }

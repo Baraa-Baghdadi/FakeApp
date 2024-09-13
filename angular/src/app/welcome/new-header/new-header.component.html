@@ -12,21 +12,23 @@
     <!-- Scroll Pagination -->
     <div *ngIf="isShowListOfNotification" class="list">
       <!-- Notifications List -->
-      <div class="notifications-list" *ngIf="(notificationListener.NotificationList$ | async) as List">
+      <div *ngIf="(notificationListener.NotificationList$ | async) as List">
         <h5 class="text-center text-danger" *ngIf="List.totalCount === 0">{{"::noNotifications" | abpLocalization}}</h5>    
-        <h4 class="text-center text-dark p-2 border-bottom" *ngIf="List.totalCount !== 0">{{"::Notofications" | abpLocalization}}</h4>    
-        <div class="messages"     
-        infiniteScroll  
+        <h4 class="text-center text-dark p-2 border-bottom" *ngIf="List.totalCount !== 0">{{"::Notofications" | abpLocalization}}</h4>   
+        <div infiniteScroll  
+        class="list2"
         (scrolled)="onScroll()"
         [scrollWindow]="false">
-          <div class="row border-bottom p-2 align-items-start notification" *ngFor="let item of List.items">
-            <i class="fa fa-bell-o col-2 fs-2 innerBell" aria-hidden="true"></i>
-              <div class="notification-content col-7">
-                  <h6>{{"::" + item.content | abpLocalization}}</h6>
+          <div class="row border-bottom p-2 notification" *ngFor="let item of List.items">
+              <div class="col-1">
+                <i class="fa fa-bell-o fs-3 ms-2 innerBell" aria-hidden="true"></i>
               </div>
-              <p class="col-2">{{item.createdOn * 1000 | date: 'MM/dd/yyyy hh:mm:ss a' }}</p>
+              <div class="notification-content col-8">
+                  <h6 class="ms-3">{{"::" + item.content | abpLocalization}}</h6>
+              </div>
+              <p class="col-3">{{item.createdOn}}</p>
           </div>
-        </div>
+        </div> 
       </div>
     </div>
    </div>

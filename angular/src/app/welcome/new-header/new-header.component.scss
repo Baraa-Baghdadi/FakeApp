@@ -5,10 +5,7 @@
     font-size: 10px !important;
     top:5px !important;
 }
-.notificationIcon::after {
-    content: none !important;
-    display: none !important;
-}
+
 .list{
   background-color: white !important;
 }
@@ -24,14 +21,16 @@
 }
 // End Main Style........
 .list{
-  width: 400px;
-  max-width: 400px !important;
-  max-height: 516px !important;
   position: absolute;
-  overflow-y: scroll;
-  overflow-x: hidden;
   top: 36px;
-  right: 0;
+  inset-inline-end: 0;
+}
+.list2{
+  width: 380px;
+  max-width: 380px !important;
+  max-height: 420px !important;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 .innerBell{
   color: #0087a1;
