@@ -18,7 +18,7 @@ namespace DawaaNeo.Patients
         [CanBeNull]
         public virtual string? FullMobileNumber { get; set; }
         public string? Name { get; set; }
-        public DateTime? Dob { get; set; }
+        public DateTime? Dob { get; set; } = null;
         public ApplicationLanguage CurrentLanguage { get; set; }
         public ICollection<PatientAddress>? PatientAddresses { get; set; }
         public ICollection<PatientProvider>? PatientProviders { get; set; }

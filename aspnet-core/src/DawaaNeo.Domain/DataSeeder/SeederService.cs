@@ -1,10 +1,12 @@
 ﻿using DawaaNeo.Data;
 using DawaaNeo.OpenIddict;
+using Polly;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Uow;
 
@@ -14,10 +16,12 @@ namespace DawaaNeo.DataSeeder
     {
         private readonly DawaaNeoDbMigrationService _migrationService;
         private readonly DawaaNeoSeedContributer _seedContributer;
-        public SeederService( DawaaNeoSeedContributer seedContributer, DawaaNeoDbMigrationService migrationService)
+        private readonly OpenIddictDataSeedContributor _openIddictSeedContributer;
+        public SeederService( DawaaNeoSeedContributer seedContributer, DawaaNeoDbMigrationService migrationService, OpenIddictDataSeedContributor openIddictSeedContributer)
         {
             _seedContributer = seedContributer;
             _migrationService = migrationService;
+            _openIddictSeedContributer = openIddictSeedContributer;
         }
 
         [UnitOfWork]
@@ -25,6 +29,8 @@ namespace DawaaNeo.DataSeeder
         {
             await _migrationService.MigrateAsync();
             // await _seedContributer.Seed();
+            var x = new DataSeedContext();
+            await _openIddictSeedContributer.SeedAsync(x);
         }
     }
 }

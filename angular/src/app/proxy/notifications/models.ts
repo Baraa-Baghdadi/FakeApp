@@ -6,6 +6,6 @@ export interface ProviderNotificationDto extends FullAuditedEntityDto<string> {
   title?: string;
   content?: string;
   type: NotificationTypeEnum;
-  isRead: boolean;
-  createdOn: number;
+  isRead?: boolean;
+  createdOn?: string;
 }

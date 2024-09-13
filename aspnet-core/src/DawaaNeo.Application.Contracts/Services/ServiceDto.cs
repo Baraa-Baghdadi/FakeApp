@@ -20,5 +20,8 @@ namespace DawaaNeo.Services
         public bool IsActive { get; set; }
         public string? OrginalImage { get; set; } // return Orginal image for showing it as base 64
 
+        // For Download File:
+        public string? FileType { get; set; }
+
     }
 }
