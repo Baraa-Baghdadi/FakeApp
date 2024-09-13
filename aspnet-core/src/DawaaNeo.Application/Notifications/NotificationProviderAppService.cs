@@ -69,7 +69,7 @@ namespace DawaaNeo.Notifications
                     IsRead = false,
                     Type = type,
                     TenantId = provider.TenantId,
-                    CreatedOn = ServiceHelper.getTimeSpam(DateTime.UtcNow).Value
+                    CreatedOn = ServiceHelper.getTimeSpam(DateTime.UtcNow)!.Value
                 };
 
                 // save json in extraProperty Column in DB:
@@ -162,6 +162,8 @@ namespace DawaaNeo.Notifications
         }
 
         #endregion
+
+
 
     }
 }
